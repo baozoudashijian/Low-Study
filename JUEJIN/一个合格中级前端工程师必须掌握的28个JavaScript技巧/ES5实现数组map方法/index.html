@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES5 实现数组map方法</title>
+</head>
+<body>
+    
+    <script>
+        
+        //ES5实现数组map方法.
+
+        Array.prototype.selfMap = function(fn,context) { //参数可以传递,不传递就是undefined;
+            let arr = Array.prototype.slice.call(this);//this 就是调用的数组,为什么不直接 let arr = this;
+            let mappedArr = [];
+            for(let i=0; i< arr.length; i++) {
+                if(!arr.hasOwnProperty(i)) continue; //arr 继承父类Object,所以有hasOwnProperty() 方法
+                mappedArr.push(fn.call(context, arr[i], i, this));
+            }
+            return mappedArr;
+        }
+        let arr = [1,2,3,4,5];
+        let newArr = arr.selfMap(function(item) {
+            return item * 2;
+        });
+        console.log(newArr);
+
+        //注: 循环调用map方法的this, 循环调用回调函数,将回调函数的结果push到新数组,最后返回新数组.
+        
+    </script>
+
+</body>
+</html>

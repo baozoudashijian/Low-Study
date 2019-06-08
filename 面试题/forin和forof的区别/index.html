@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>for in与for of的区别</title>
+</head>
+<body>
+    
+
+
+    <script>
+        
+        // for in与for of的区别
+
+        //遍历数组
+
+        Array.prototype.gender = '男'; //在原型上增加一个属性;
+        var arr = [1,2,3,4,5,6,,8];
+        console.dir(arr);
+        arr.name = '数组';
+
+        for(var key in arr) {
+            console.log(typeof key); //证明key是字符串型数字,不能直接进行几何运算
+            console.log(arr[key]);// 会遍历出原型对象上的可枚举属性
+        }
+        // 使用for in也可以遍历数组,但是会存在以下问题
+        //                                          1.index索引为字符串型数字,不能直接进行几何运算
+        //                                          2.遍历顺序有可能不是按照实际数组的内部顺序
+        //                                          3.for in会遍历数组所有可枚举属性,包括原型
+        // 注: 所以for in 更适合遍历对象,不要使用for in遍历数组
+
+        var arr2 = [4,5,6,7,8,'name'];//这个name和下面的name不一样
+        arr2.name = "数组2";
+        for(var key of arr2) {
+            console.log(typeof key);//证明key遍历的是数字类型,可以直接进行几何运算.
+            console.log(key,'key');//key 是数组括号里的值.
+            console.log(arr2);//原数组【arr】,元素组里的值【key】
+        }
+
+
+        // 遍历对象
+
+        function Student() {
+            this.name = "张荣杰";
+            this.age = 17;
+        }
+        Student.prototype.birth = "1998 87 98"; //设置原型上的属性
+        
+        var obj = new Student();
+        console.dir(obj);
+        for(var k in obj) {
+            if(obj.hasOwnProperty(k))
+            console.log(k,obj[k]);
+        }
+
+        var obj2 = {
+            name: 'CAIWANG',
+            age: 20
+        }
+        Object.keys(obj).forEach(function(key,index) { //Object.keys();
+            console.log(key,obj2[key]);
+        })
+
+
+        
+
+    </script>
+
+</body>
+</html>

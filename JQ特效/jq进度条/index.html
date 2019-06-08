@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>会员等级显示动画</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .mature-progress {
+        margin-top: 15px;
+    }
+
+    .mature-progress .mature-progress-top {
+        position: relative;
+        padding-left: 15px;
+        font-size: 18px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .mature-progress .mature-progress-top:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 8px;
+        height: 20px;
+        left: 0;
+        top: 10px;
+        background: #e10482;
+        border-radius: 5px;
+    }
+
+    .mature-progress .mature-progress-bottom {
+        border-radius: 5px;
+        border: 1px solid #f2f2f2;
+        padding: 15px;
+        position: relative;
+        width: 720px;
+        height: 125px;
+    }
+
+    .mature-progress .mature-progress-bottom p>span {
+        color: #e10482;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box {
+        height: 105px;
+        padding: 10px 0 0 10px;
+        position: absolute;
+        top: 6px;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.bgtwos {
+        z-index: 1;
+        top: 55px;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.bgtwos dl dt {
+        border: 5px solid #f2f2f2;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.v0 dl:nth-of-type(1) dt {
+        background: #e10482;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.v1 dl:nth-of-type(2) dt {
+        background: #e10482;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.v2 dl:nth-of-type(3) dt {
+        background: #e10482;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.v3 dl:nth-of-type(4) dt {
+        background: #e10482;
+    }
+
+    .mature-progress .mature-progress-bottom .mature-progress-box.v4 dl:nth-of-type(5) dt {
+        background: #e10482;
+    }
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+
+<body>
+    <center>
+        <div class="mature-progress">
+            <div class="mature-progress-bottom">
+                <!--  -->
+                <div class="mature-progress-box v0" id="mature_progress">
+                    <dl>
+                        <dt>0</dt>
+                        <dd><span class="member-icon v0"></span>游侠</dd>
+                    </dl>
+                    <dl>
+                        <dt>200</dt>
+                        <dd><span class="member-icon v1"></span>骑士</dd>
+                    </dl>
+                    <dl>
+                        <dt>1000</dt>
+                        <dd><span class="member-icon v2"></span>子爵</dd>
+                    </dl>
+                    <dl>
+                        <dt>5000</dt>
+                        <dd><span class="member-icon v3"></span>伯爵</dd>
+                    </dl>
+                    <dl>
+                        <dt>10000</dt>
+                        <dd><span class="member-icon v4"></span>公爵</dd>
+                    </dl>
+                    <div class="progress-box" id="progress_content" data=progress="8000">
+                        <i class="progress-box-1"></i>
+                        <i class="progress-box-2"></i>
+                        <i class="progress-box-3"></i>
+                        <i class="progress-box-4"></i>
+                        <i class="progress-box-5"></i>
+                    </div>
+                </div>
+                <div class="mature-progress-box bgtwos">
+                    <dl>
+                        <dt></dt>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+
+</html>

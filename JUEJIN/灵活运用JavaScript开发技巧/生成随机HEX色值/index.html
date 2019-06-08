@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生成随机的HEX值</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //生成随机的HEX值
+        const RandomColor = () => "#" + Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0");
+        const color = RandomColor();
+        console.log(color); //#a884c7;
+
+        // 注: toString(16) 将数字转成16进制.
+        //     ES6 字符串扩展 padStart(), padEnd;
+        let str = 'rongjie'.padStart(13,'zhang');
+        console.log(str);// 如果字符串长度不够13的话,就在字符串的前面加上 'zhang' 补齐;
+
+        let str2 = 'huacheng'.padEnd(10, 'yu');
+        console.log(str2);
+    
+    </script>
+</body>
+</html>

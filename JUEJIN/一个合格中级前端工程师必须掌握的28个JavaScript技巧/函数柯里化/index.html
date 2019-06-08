@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数柯里化</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //函数柯里化
+        function curry(fn) {
+            if(fn.length <= 1) return fn;//方法的length属性,就是输入参数的个数.
+            const generator = (...args) => {
+                if(fn.length === args.length) { //
+                    return fn(...args);
+                }else{
+                    return (...args2) => {
+                        return generator(...args, ...args2)
+                    }
+                }
+            }
+            return generator;
+        }
+        let add = (a,b,c,d) => a + b + c + d;
+        const curriedAdd = curry(add);
+        console.log(curriedAdd(5)(6)(7)(8));
+        console.log(add(5,6,7,8));
+
+        // 注: fn是一层闭包,
+
+    </script>
+
+</body>
+</html>

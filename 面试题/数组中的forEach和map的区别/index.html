@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组中的forEach和map的区别</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // 数组中的forEach和map的区别
+        
+        // 相同点:
+        //       1.都是循环遍历数组中的每一项都支持三个参数当前项、索引值、当前数组
+        //       2.匿名函数中的this都是指向window
+        //       3.只能遍历数组都不会改变原数组.
+
+        var arrMap = [1,2,3,4,5,6];
+        var newArrMap = arrMap.map((item,index,arr) => {
+            console.log(this); // 匿名函数中的this指向window
+            return item * 2;
+        });
+        console.log(newArrMap); //返回一个新数组
+        console.log(arrMap);//不会改变元素组
+
+        var arrForeach = [1,2,3,4,5];
+        var newArrTrue = [];
+        var newArrForeach = arrForeach.forEach((item,index,arr) => {
+            console.log(this); //this指向window;
+            newArrTrue.push(item * 2);
+            // if(item === 4) { break }; ///不支持break;
+            if(item === 4) {return} ///foreach不支持return
+        });
+        console.log(newArrForeach); //返回undefined;
+        console.log(arrForeach);// 不会改变元素组
+        console.log(newArrTrue);
+
+        //注: 最大的区别就是map返回新的数组,而foreach返回undefined,需要定义一个新数组,然后push进去.
+    </script>
+</body>
+</html>

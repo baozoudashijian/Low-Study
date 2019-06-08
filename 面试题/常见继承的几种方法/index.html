@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常见继承的几种方法</title>
+</head>
+<body>
+    
+
+    <script>
+        // 常见继承的几种方法.
+
+        // 原型链继承
+        function SuperType() {
+            this.property = 'true';
+        }
+        SuperType.prototype.getSuperValue = function() {
+            return this.property;
+        }
+
+        function SubType() {
+            this.subProperty = 'false';
+        }
+        SubType.prototype = new SuperType(); ///核心继承代码.
+        SubType.prototype.getSubValue = function() {
+            return this.subProperty;
+        }
+        var instance = new SubType();
+        console.log(instance.property);//true 可以访问父类构造函数上的属性;
+        console.log(instance.getSuperValue()); //true 调用父原型对象上的方法.
+        // PS: 优点: 简单明了,容易实现,在父类新增原型属性和方法,子类都能访问到.
+        //     缺点: 包含引用类型值的函数,所有的实例都指向同一个引用地址,修改一个,其他的都会改变
+        //           不能像超类型的构造函数传递参数.
+
+        //  call 方法继承
+        function SuperTypeOne() {
+            this.colors = ['red','green'];         
+        }
+        SuperTypeOne.prototype.getVal = function() {
+            return this.colors;
+        }
+
+        function SubTypeOne() {
+            console.log(this);
+            SuperTypeOne.call(this); ///继承核心代码 ///将父类的this变成子类的this  this【字类】.colors复制一份
+            this.age = 18;
+        }
+        SubTypeOne.prototype.sayHi = function() {
+            return this.age;
+        }
+
+        var instanceOne = new SubTypeOne();
+        console.dir(instanceOne);
+        //PS: 优点: 简单明了,直接继承了超类型构造函数的属性和方法.
+        //    缺点: 只能继承构造函数上的方法,不能继承原型对象上的方法.方法只能定义在构造函数内部.
+        
+        
+
+    </script>
+</body>
+</html>

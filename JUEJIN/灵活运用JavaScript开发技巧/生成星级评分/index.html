@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生成星级评分</title>
+</head>
+<body>
+
+
+    <script>
+        
+        //生成星级评分.
+        const StartScore = rate => "★★★★★☆☆☆☆☆".slice(5-rate, 10-rate);
+        const start = StartScore(5);
+        console.log(start);
+
+    </script>
+    
+</body>
+</html>

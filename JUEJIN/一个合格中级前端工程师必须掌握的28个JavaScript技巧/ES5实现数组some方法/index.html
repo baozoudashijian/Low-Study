@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES5实现数组some方法</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //ES5 实现数组some方法.
+        
+        Array.prototype.selfSome = function(fn,context) {
+            let arr = Array.prototype.slice.call(this);
+            if(!arr.length) return false; //数组为空返回false;
+            for(let i=0; i<arr.length; i++) {
+                if(!arr.hasOwnProperty(i)) continue;
+                let res = fn.call(context, arr[i], i, this);
+                if(res) return true; //如果有一个返回true; 返回true,否则返回false;
+                // if(!res) return false //猜测every方法.
+            }
+            return false;
+
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>操作URL查询参数</title>
+</head>
+<body>
+    
+    <script>
+        
+        // 操作URL查询参数
+        // const params = new URLSearchParams(location.search.replace(/\?/ig,""));//匹配问好后面的东西;
+        const params = new URLSearchParams("forum.php?mod=viewthread&tid=4596");
+        console.log(params);
+        console.log(params.has("tid")); // true;
+        console.log(params.get("tid")); // 4596;
+        
+        // location.search就是问好后面的一堆东西; ?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=URLSearchParams&oq=startwith&rsv_pq=e7d929e200014188&rsv_t=bd92jPDgQUQ1FOx7
+        // URLSearchParams对象提供操作参数的方法例如get,has
+
+    </script>
+
+</body>
+</html>

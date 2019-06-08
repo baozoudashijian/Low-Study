@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>letvarconst的区别</title>
+</head>
+
+<body>
+
+    <script>
+
+        // let、var、const的区别
+
+        // var 第一个就是作用域问题,var不是针对一个块级作用域,而是针对一个函数作用域
+
+        function runTowerExperiment(tower, startTime) {
+            var t = startTime;
+
+            tower.on('tick', function () {
+                // ...code that uses t...
+                var t = 'aa';
+            });
+            // ...more code...
+        }
+        // PS: 如果我们在回调函数中再次命名了t的话,后者就会将前者覆盖.
+
+        // var 第二个问题就是循环问题
+        var message = ["Meow!", "I'm a talking cat", "Callbacks are fun!"];
+
+        for (var i = 0; i < message.length; i++) {
+            setTimeout(function () {
+                console.log(i);// 证明i的值一直是3;
+                document.write(message[i]); // 打印出的是undefined;
+            }, i * 1500)
+        }
+        // PS: 因为for循环后 i 的值等于3;
+
+        // 变量的提升
+
+        var v = 'HELLO WORLD';
+        (function () {
+            // var v = undefined; 此处进行变量提升
+            console.log(v); // undefined
+            var v = 'I LOVE YOU';
+        })();
+
+        // 使用 let 
+        var vlet = "HELLO WORLD";
+        (function() {
+            console.log(vlet); //let不存在变量提升,所以取了全局变量.
+            let v = "I LOVE YOU";
+        })();
+
+        let arr = ["you",'are','my','destiny'];
+        for(let i=0; i<arr.length; i++) {
+            setTimeout(() => {
+                document.write(arr[i]); //可以完全打印出数组项
+            },i * 1500)
+        }
+
+        // 使用const 
+        const foo = 1;
+        // foo = 2; 常量不能被改变,会报错.
+
+
+    </script>
+
+</body>
+
+</html>

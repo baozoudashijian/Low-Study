@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载IntersectionObserver的实现方式</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+</style>
+
+<body>
+
+    <div>
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1UQFEbQ5E3KVjSZFCXXbuzXXa-1920-563.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB15PBDbUGF3KVjSZFoXXbmpFXa-1920-494.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1kR8FbQWE3KVjSZSyXXXocXXa-1920-1059.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1vudFbRGE3KVjSZFhXXckaFXa-1920-602.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1mO8GbRSD3KVjSZFqXXc4bpXa-1920-793.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1mKJDbL5G3KVjSZPxXXbI3XXa-1920-1218.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB11mNNbHys3KVjSZFnXXXFzpXa-1920-702.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1H14KbRKw3KVjSZTEXXcuRpXa-1920-355.jpg"
+            alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1zIBKbRGw3KVjSZFDXXXWEpXa-1920-408.jpg"
+            alt="">
+    </div>
+
+    <script>
+        // 传统方式 实现图片懒加载
+
+        // let imgArr = [...document.querySelectorAll('img')];
+        // let imglen = imgArr.length;
+
+        // const lazyLoad = () => {
+        //     imgArr.forEach((img, index) => {
+        //         let rect = img.getBoundingClientRect();
+        //         if (rect.top < window.innerHeight) {
+        //             img['src'] = img.dataset.src;
+        //         }
+        //     })
+        // }
+        // lazyLoad();
+        // window.onscroll = () => {lazyLoad() };
+
+        // console.log(imgArr);
+
+        // IntersectionObserver实现图片懒加载
+        let imgList = [...document.querySelectorAll('img')];
+
+        let lazyLoad = function() {
+            // 实例化一个IntersectionObserver对象.
+            let observer = new IntersectionObserver(entries => {
+                console.log(entries,'entries entries entries');
+                entries.forEach(entry => {
+                    console.log(entry,'entry entry entry');
+                    if(entry.intersectionRatio > 0) { // 根据intersectionRatio判断是否进入可视区域.
+                        entry.target.src = entry.target.dataset.src;
+                        observer.unobserve(entry.target)
+                    }
+                })
+            });
+
+            imgList.forEach(img => {
+                //循环观察所有的img标签. 当进入可视区域的时候就会调用传入的回调函数.
+                observer.observe(img);
+                // 我猜测的实现方法
+                // 定义一个entries空数组
+                // 当实例化 IntersectionObserver的时候传入回调函数
+                // 调用observe方法,就向entries中去push一个东西.
+            })
+        }
+        window.onscroll = function() {
+            lazyLoad();
+        }
+
+
+
+
+    </script>
+
+</html>

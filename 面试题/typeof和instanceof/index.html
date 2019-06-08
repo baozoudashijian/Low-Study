@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>typeof和instanceof</title>
+</head>
+<body>
+    
+
+    <script>
+    
+    // typeof和instanceof
+
+    console.log(typeof 'hello'); // string
+    console.log(typeof 123); // number
+    console.log(typeof true); //bool
+    console.log(typeof null); //object
+    console.log(typeof new Object()); //object
+    console.log(typeof function() {}); //function
+    console.log(typeof undefined); //undefined
+    
+    // instanceof: 用于判断一个变量是否是某个对象的实例;
+
+    function Person() {}
+    function Animal() {}
+    
+    var person = new Person();
+    var animal = new Animal();
+
+    console.log(person instanceof Person); //true
+    console.log(animal instanceof Animal); //true
+    console.log(animal instanceof Object); //true
+    console.log(1 instanceof Person); //false
+
+    var oStr = new String('hello world');
+    console.log(typeof(oStr)); //object
+    console.log(oStr instanceof String); // true
+    console.log(oStr instanceof Object); // true
+
+
+    </script>
+
+</body>
+</html>

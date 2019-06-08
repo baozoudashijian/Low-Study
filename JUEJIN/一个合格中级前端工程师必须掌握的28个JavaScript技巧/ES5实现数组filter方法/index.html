@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES5实现数组filter方法</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //ES5 实现数组filter方法.
+
+        Array.prototype.selfFilter = function(fn, context) {
+            let arr = Array.prototype.slice.call(this);
+            let filteredArr = [];
+            for(let i=0; i<arr.length; i++) {
+                if(!arr.hasOwnProperty(i)) continue;
+                fn.call(context, arr[i], i, this) && filteredArr.push(arr[i]); //如果左边返回true,才会执行右边
+            }
+            return filteredArr;
+        }
+        let arr = [1,2,3,4,5,6,7,8];
+        let newArr = arr.selfFilter(function(item) {
+            return item > 5;
+        });
+        console.log(newArr); //[6,7,8];
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+<body>
+    
+
+    <script>
+        // 实现私有变量,如果我们写一个函数,里面有一个name值,我们可以允许任何人访问这个
+        // name属性,但是只有少部分人,可以修改这个name属性,我们就可以使用闭包,
+
+        var person = function() {
+            var name = "FE";
+            return {
+                getName: function() {
+                    return name;
+                },
+                setName: function(newName) {
+                    name = newName
+                }
+            }
+        };
+        var createStore = person();
+        console.log(createStore);
+        console.log(createStore.getName()); // 获得属性值.
+        console.log(createStore.setName('ABC')); // 修改属性值.
+        console.log(createStore.getName());
+
+        //注: 缺点,造成内存消耗过大,如果处理不当,会造成内存泄漏.
+        // 内存泄漏: 内存泄漏是指已动态分配的堆内存由于某种原因程序未释放,或者无法释放,造成系统内存浪费,
+        // 导致程序运行速度减慢甚至系统崩溃等严重后果.
+    </script>
+
+</body>
+</html>

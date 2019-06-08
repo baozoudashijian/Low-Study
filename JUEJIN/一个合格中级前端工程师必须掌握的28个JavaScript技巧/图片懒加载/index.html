@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载</title>
+</head>
+<style>
+    * {margin: 0; padding: 0}
+</style>
+<body>
+    
+    <div>
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1UQFEbQ5E3KVjSZFCXXbuzXXa-1920-563.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB15PBDbUGF3KVjSZFoXXbmpFXa-1920-494.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1kR8FbQWE3KVjSZSyXXXocXXa-1920-1059.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1vudFbRGE3KVjSZFhXXckaFXa-1920-602.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1mO8GbRSD3KVjSZFqXXc4bpXa-1920-793.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1mKJDbL5G3KVjSZPxXXbI3XXa-1920-1218.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB11mNNbHys3KVjSZFnXXXFzpXa-1920-702.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1H14KbRKw3KVjSZTEXXcuRpXa-1920-355.jpg" alt="">
+        <img src="./lazyLoad_02.jpg" data-src="https://img.alicdn.com/tfs/TB1zIBKbRGw3KVjSZFDXXXWEpXa-1920-408.jpg" alt="">
+    </div>
+
+    <script>
+        // 图片懒加载
+        let imgList = [...document.querySelectorAll("img")]; // 扩展运算符可以复制数组也可以复制对象,类似结构
+        let num = imgList.length;//图片数量的总数;
+        console.log(imgList);
+
+        let lazyLoad = (function() {
+            let count = 0; //加载图片的个数;
+            return function() {
+                let deleteIndexList = [];
+                imgList.forEach((img, index) => {
+                    // getBountingClientRect() 返回一个对象.top获得距离可视窗口的高度.
+                    let rect = img.getBoundingClientRect();
+                    // console.log(rect.top);
+                    if(rect.top < window.innerHeight) {
+                        img.src = img.dataset.src;
+                        deleteIndexList.push(index);
+                        count++;
+                        // num: img标签的个数
+                        // count: 加载图片的计数
+                        // 如果所有图片加载完毕了,就移除监听事件;
+                        if(count === num) {
+                            document.removeEventListener('scroll',lazyLoad)
+                        }
+                    }
+                });
+                console.log(deleteIndexList);
+                imgList = imgList.filter((_, index) => !deleteIndexList.includes(index));
+            }
+        })();
+        //首次加载页面默认加载一次
+        lazyLoad();
+        // 滑动滚动条调用方法.
+        window.onscroll = function() {
+            throttle(lazyLoad)(); //给懒加载加上节流的效果.
+        }
+        // TODO: 给scroll加上节流.
+        const throttle = (func,time = 5000) => {
+            let previous = new Date(0).getTime();
+            let timer;
+            return _throttle = () => {
+                let now = new Date().getTime();
+                
+                if(now - previous > time) {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        func();
+                    },time)
+                }
+            }
+        }
+        // TODO: Intersection Observer()实现懒加载.
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断对象数据类型</title>
+</head>
+<body>
+    
+    <script>
+        //判断对象对象数据类型.
+
+        // 为甚么我们需要单独写一个方法去判断是否为对象?
+        // 因为万物皆对象
+        const arr = [1,2,3,4];
+        console.log(arr instanceof Array); //true
+        console.log(arr instanceof Object); //true
+
+        const func = () => 1;
+        console.log(func instanceof Function);//true
+        console.log(func instanceof Object);//true
+
+        // PS: 因为数组,方法的构造函数都是继承至Object;
+        // Array,Function 使用instanceof Object都会返回true.
+        // 所以我们需要自己定义一个方法去解决这个问题.
+
+        
+        const isType = type => target => `[object ${type}]` === Object.prototype.toString.call(target);
+        
+        // 创建了一个判断数组的方法. 【使用到了闭包】
+        const isArray = isType('Array')
+        console.log(isArray([])); //true
+        console.log(isArray(23)); //false
+
+        //创建了一个判断对象的数据类型. 【再一次证明使用到了闭包】
+        const isObject = isType('Object');
+        console.log(isObject('2222')); // false
+        console.log(isObject([])) // false
+        console.log(isObject(() => {})) // false
+        console.log(isObject({})); // true
+
+        var num = 100;
+        var str = 'hello world';
+        var bool = false;
+        var array = [];
+        var fun = function() {};
+        var obj = {};
+
+        console.log(Object.prototype.toString.call(num)); //[object Number];
+        console.log(Object.prototype.toString.call(str)); //[object String];
+        console.log(Object.prototype.toString.call(bool)); //[object Boolean];
+        console.log(Object.prototype.toString.call(array)); //[object Array];
+        console.log(Object.prototype.toString.call(fun)); //[object Function];
+        console.log(Object.prototype.toString.call(obj)); //[object Object];
+
+        // 注: 判断数据类型大概可以分为三类: typeof instanceof Object.prototype.toString.call();
+
+ 
+
+    </script>
+</body>
+</html>

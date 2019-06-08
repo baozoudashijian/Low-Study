@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组中reduce使用方法</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //数组中reduce 使用方法.这个方法很有用但是不会用.
+        
+        let arr = [1,2,3,4,5];
+        // let sum = arr.reduce((p,c) => p+c , 10); // 箭头函数写法
+        let sum = arr.reduce(function(prev,next) {
+            console.log(prev,next);//prev 是每次累加的值.
+            return prev + next; //应该是每次返回的值,作为下一次的prev.
+        },10);//设置初始的prev值
+        console.log(sum);
+    
+    </script>
+</body>
+</html>

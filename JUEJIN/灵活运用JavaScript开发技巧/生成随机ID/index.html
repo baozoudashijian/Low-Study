@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生成随机ID</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //生成随机ID
+        const RandomID = len => Math.random().toString(36).substr(3,len);
+        console.log(Math.random());
+        console.log(Math.random().toString(36));
+        console.log(Math.random().toString(36).substr(3,10));
+        const id = RandomID(10);
+        console.log(id);
+
+
+        //Math.random().toString(36) 将随机数转成36进制;
+        // substr(3,len) 切割字符串. 索引 切的个数.
+    </script>
+</body>
+</html>

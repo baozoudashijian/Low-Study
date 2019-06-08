@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>滚动加载</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .box {
+        height: 2000px;
+        background: green;
+    }
+    .app {
+        position: relative;
+        width: 1000px;
+        height: 500px;
+        margin: 0 auto;
+        background: pink;
+        border: 5px solid #000;
+        overflow-y: scroll;
+    }
+    .item_pic {
+        display: inline-block;
+        width: 500px;
+        height: 400px;
+    }
+    .pos {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 50px;
+        left: 100px;
+        height: 100px;
+        background: blue;
+    }
+
+</style>
+
+<body>
+    <div class="box"></div>
+    <div class="app">
+        <div class="pos"></div>
+        <img class="item_pic" data-url="https://img.alicdn.com/tfs/TB1PM4kVjTpK1RjSZKPXXa3UpXa-79-85.png" src="" alt="">
+        <img class="item_pic" data-url="https://img.alicdn.com/tfs/TB1CeCUaUGF3KVjSZFvXXb_nXXa-133-85.png" src="" alt="">
+        <img class="item_pic" data-url="https://img.alicdn.com/tfs/TB1GsbyaA9E3KVjSZFGXXc19XXa-194-27.png" src="" alt="">
+        <img class="item_pic" data-url="https://img.alicdn.com/tfs/TB1lx.BRwDqK1RjSZSyXXaxEVXa-750-416.jpg" src="" alt="">
+        <img class="item_pic" data-url="https://g01.alibaba-inc.com/tfs/TB1hyQmX.GF3KVjSZFmXXbqPXXa-1049-534.tfsprivate.png" src="" alt="">
+        <img class="item_pic" data-url="https://img.alicdn.com/tfs/TB1iThnSyrpK1RjSZFhXXXSdXXa-1218-419.png" src="" alt="">
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/scrollLoad.js"></script>
+    <script>
+        // 获取屏幕可视窗口的大小
+        var wHeight = $(window).height();
+        console.log(wHeight+'可视窗口的大小');
+
+        //浏览器窗口顶部与文档顶部之间的距离,也就是滚动条滚动的距离.
+        var sHeight = $(document).scrollTop();
+        console.log(sHeight);
+
+        //获取元素尺寸
+        var appW = $('.app').innerWidth();
+        var appH = $('.app').innerHeight(); //width + padding
+        var appWb = $('.app').outerWidth();
+        var appHb = $('.app').outerHeight();//width + padding +border
+
+        console.log(appW,appH,appWb,appHb);
+
+        //获取元素的位置信息
+        var appL = $('.app').offset().left;
+        var appT = $('.app').offset().top;
+
+        var posL = $('.pos').position().top;
+        var posT = $('.pos').position().left;
+
+        console.log(appL,appT);
+        console.log(posL,posT);
+
+        $('.item_pic').scrollLoading({container: '.app'});
+    </script>
+
+</body>
+
+</html>

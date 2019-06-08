@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件循环</title>
+</head>
+<body>
+
+
+    <script>
+        // 事件循环
+        // setTimeout(function() {
+        //     console.log(1);
+        // },0);
+        // console.log(2);
+        // 输出顺序 2,1;
+        
+        //Event Loop: 是指主线程从 "任务队列" 中循环读取任务.
+        // 上述例子中,我们明白首先执行主线程中的同步任务, 当主线程任务执行完毕后,
+        // 再从Event Loop中读取任务,因此先输出2,再输出1;
+
+        // setTimeout(() => {
+        //     console.log(3);
+        // },0);
+        // Promise.resolve().then(function() {
+        //     console.log(2);
+        // });
+        // console.log(1);
+        //输出顺序 1 2 3;
+        // 先输出1, 没有问题, 因为是同步任务再主线程中优先执行,这里的问题是setTimeout和Promise.then任务的执行优先级是如何定义的.
+
+        // macro-task (宏任务): script(主程序代码),setTimeout,setInterval,setImmediate,I/O,UI rendering;
+        // micro-task (微任务): process.nextTick, Promises, Object.observe,MutationObservaer
+        // 先执行主程序代码,然后在执行微任务代码,然后再返回去执行宏任务代码.
+        setTimeout(function() {
+            console.log(1);
+        },0);
+        new Promise(function(reslove,reject) {
+            console.log(2);
+            reslove();
+        }).then(function() {
+            console.log(3);
+        }).then(function() {
+            console.log(4);
+        });
+        // process.nextTick(function() {
+        //     console.log(5);
+        // });
+        console.log(6);
+        // 输出顺序 2 6 3 4 1;
+        //  script(主程序代码[同步代码])--->process.nextTick--->promise--->setTimeout
+        // PS: new Promise 构造部分也是同步代码.
+
+
+    </script>
+    
+</body>
+</html>

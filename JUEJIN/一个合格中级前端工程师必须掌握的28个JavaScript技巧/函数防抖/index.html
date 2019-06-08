@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数防抖</title>
+</head>
+<body style="height: 10000px">
+    
+    
+    <script>
+        
+        //函数防抖
+        const debounce = (func,time = 2000, options = {
+            leading: false,
+            context: null
+        }) => {
+            let timer;
+            const _debounce = function(...args) {
+                if(timer) {
+                    // 如果在规定的事件内一直触发的话就会清除定时器重新计算时间.
+                    clearTimeout(timer);
+                }
+                if(options.leading && !timer) {
+                    timer = setTimeout(null, time);
+                    func.apply(options.context, args);
+                }else {
+                    timer = setTimeout(() => {
+                        func.apply(options.context, args);
+                        timer = null;
+                    },time);
+                }
+            }
+            return _debounce;
+        }
+        var fangdou = debounce(() => { console.log('学习防抖的知识!!!') });
+        window.onscroll = function() {
+            fangdou();
+        }
+
+
+        
+    </script>
+
+</body>
+</html>

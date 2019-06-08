@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数节流</title>
+</head>
+
+<body style="height: 10000px">
+
+
+
+    <script>
+
+        //函数节流.
+        const throttle = (func, time = 5000, options = { //time = 5，time = 5000;
+            leading: false, // 是否在进入时立即执行一次;
+            trailing: true, //是否在事件触发结束后额外再触发一次.
+            context: null
+        }) => {
+            let previous = new Date(0).getTime(); //返回 0,获得时间戳; //这里又是使用闭包保存这个变量,一直进行时间的比较.
+            let timer;
+            // console.log(previous);
+            const _throttle = function(...args) {
+                let now = new Date().getTime(); //获得当前的事件戳.
+                // console.log(now);
+                if(!options.leading) {
+                    if(timer) return
+                    timer = setTimeout(() => {
+                        timer = null;
+                        func.apply(options.context, args);
+                    }, 2000)
+                }else if(now - previous > time) {
+                    func.apply(options.context,args);
+                    previous = now;
+                }else if(options.trailing) { //是否额外触发一次 // if else if 应该只选择其中一个进行执行,但是options.trailing为什么会重新执行一次,应该时scroll不止会触发一次这个方法
+                    clearTimeout(timer); //使用定时器前先清除定时器
+                    timer = setTimeout(() => { // 额外执行一次[setTimeout]; //亲测可行
+                        console.log('额外执行一次');
+                        func.apply(options.context, args)
+                    }, 3000);
+                }
+
+            }
+            //——throttle增加一个cacel方法,用于恢复默认的配置参数.
+            _throttle.cancel = () => {
+                previous = 0;
+                clearTimeout(timer);
+                timer = null;
+            }
+
+            return _throttle;
+        }
+        let jieliu = throttle(()=>{ console.log('函数节流,函数节流, 函数节流') });
+        console.dir(jieliu);
+        window.onscroll = function() {
+            jieliu();
+        };
+
+        // 目前存在的问题:
+        //              leading和tralling 单独设置都会有效,但是
+        //              组合使用的话不会触发 额外执行一次的方法.
+
+        // 节流: 连续触发事件但再n秒中只执行一次函数.
+        //防抖: 多次触发事件后,事件处理函数只执行一次,并且是在触发操作结束时执行
+        // 原理: 对处理函数进行延时操作,若设定延时到来之前,再次触发事件,则清除上一次
+        //       的延时操作,重新定时.
+
+        
+
+
+    </script>
+</body>
+
+</html>

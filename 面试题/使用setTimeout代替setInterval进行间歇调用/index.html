@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用setTimeout代替setInterval进行间歇性调用</title>
+</head>
+<body>
+    
+    <script>
+        //使用setTimeout代替setInterval进行间歇性调用
+        var executeTimes = 0;
+        var intervalTime = 500;
+        var intervalId = null;
+
+        // intervalId = setInterval(intervalFun,intervalTime);
+        
+        setTimeout(timeoutFun,intervalTime);
+
+        function intervalFun() {
+            executeTimes++;
+            console.log("doIntervalFun——" + executeTimes);
+            if(executeTimes == 5) {
+                clearInterval(intervalId);
+            }
+        }
+
+        function timeoutFun() {
+            executeTimes++;
+            console.log("doSettimeoutFun——" + executeTimes);
+            if(executeTimes < 5) {
+                setTimeout(arguments.callee,intervalTime);
+            }
+        }
+
+        //原因: 间歇时间不准确的问题.
+    </script>
+</body>
+</html>
