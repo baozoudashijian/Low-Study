@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie</title>
+</head>
+<body>
+    
+
+
+    <script>
+        
+        // 一、cookie
+        // 1.为什么会出现cookie?
+        // 答: 网络最大的问题之一是如何管理状态.简而言之,服务器无法知道两个请求是否来自同一个浏览器.
+
+        // 2.cookie响应原理
+        // 由于http是无状态协议,一旦客户端与服务端的数据交互完毕,就会断开链接,再次请求,会重新连接,这就
+        // 说明服务器单从网络链接上是没有办法知道用户省份的.怎么办呢?那就给每次新的用户请求时,给他颁发一个身份证
+        // 下次访问时,必须带上身份证,这样服务器就知道是谁来访问了,针对不同的用户做出不同的响应,这就是cookie的原理
+        // 两个步骤: 第一次请求: 颁发省份证  之后请求: 要求带上身份证
+
+        // 3.cookie是纯文本
+        // cookie就是储存一些服务器需要的信息,每次请求站点,会发送相应的cookie.这些cookie可以用来辨别用户身份信息
+        // 等作用
+
+        // 4.cookie的执行流程
+        // 就是第一次请求给你一个id,然后之后的请求你都需要带上这个id去请求.
+        // 类似登陆注册,你首先需要注册一个账号,之后你就可以每次登陆了.
+
+        // 5.cookie可以设置过期时间
+        // cookie按照过期时间分为两类: 会话cookie和持久化cookie,会话cookie是一种临时的cookie,用户退出浏览器
+        // 会话cookie就被删除了,持久化cookie则会储存在硬盘里.保留时间更长,关闭浏览器,重启电脑它依然存在,通常
+        // 持久性的cookie会维护某一个用户周期性访问服务器的配置文件或则登陆信息
+        // 持久话cookie: 设置一个特定的时间过期 (Expires)或者有效期(Max-Age);
+
+        // 6.cookie的属性
+        // a.cookie的域: 根据不同的域(domain)发送不同的cookie
+        // b.path: path可以为服务器特定文档指定cookie,这个属性设置的url且带有这个前缀的url路径都是有效的.
+        // d.secure: 设置了secure属性,cookie只有在https协议加密情况下才会发送给服务端.
+
+        // 7.操作cookie
+        // 没有直接操作cookie的方法,需要自己去封装
+        function getCookie(key) {
+            var arr1 = document.cookie.split(';');//'name=张荣杰;sex=男;age=18' ----> ["name=张荣杰","sex=女","age=18"];
+            for(var i=0,len = arr1.length; i<len; i++) { //循环上面的数组,然后在循环中分别取分割.
+                var arr2 = arr1[i].split('=');
+                if(arr2[0] == key) {
+                    return decodeURI(arr2[1]);
+                }
+            }
+        }
+
+        function setCookie(key,value,time) {
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate() + time);
+            document.cookie = key+'='+value+';expires='+oDate.toGMTString();
+        }
+        setCookie('sex','女',10);
+        console.log(getCookie('sex'));
+
+
+    </script>
+</body>
+</html>

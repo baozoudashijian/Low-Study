@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取当前日期年月日</title>
+</head>
+<body>
+    <div>
+        <p class="date">当前日期: </p>
+        <p class="year">当前年份: </p>
+        <p class="month">当前月份: </p>
+        <p class="day">当前日期: </p>
+        <p class="hour">当前小时: </p>
+        <p class="minutes">当前分钟: </p>
+        <p class="second">当前毫秒值: </p>
+        <p class="xinqi">当前星期: </p>
+    </div>
+
+    <script>
+        var oDate = document.querySelector('.date');
+        var oDay = document.querySelector('.day');
+        var oXinqi = document.querySelector('.xinqi');
+        var oYear = document.querySelector('.year');
+        var oHour = document.querySelector('.hour');
+        var oMinutes = document.querySelector('.minutes');
+        var oMonth = document.querySelector('.month');
+        var oSecond = document.querySelector('.second');
+
+        //获得当前日期
+        var dt = new Date();
+        console.dir(dt);
+        oDate.innerHTML += dt;
+
+        //获得日
+        var getDate = dt.getDate();
+        oDay.innerHTML += getDate;
+
+        // 返回星期几
+        var getDay = dt.getDay();
+        oXinqi.innerHTML += getDay;
+
+        //获得年份
+        var getFullYear = dt.getFullYear();
+        oYear.innerHTML += getFullYear;
+        
+        //获得小时
+        var getHours = dt.getHours();
+        oHour.innerHTML += getHours;
+
+        // 获得微秒
+        console.log(dt.getMilliseconds());
+
+        //获得分钟
+        var getMinutes = dt.getMinutes();
+        oMinutes.innerHTML += getMinutes;
+
+        //获得月份【获得的月份是从0开始算起】
+        var getMonth = dt.getMonth();
+        oMonth.innerHTML += getMonth;
+
+        //获得当前秒数
+        var getSecond = dt.getSeconds();
+        oSecond.innerHTML += getSecond;
+
+        //距离1970年1月1日的毫秒数
+        console.log(dt.getTime());
+
+        //UTC世界统一时间
+
+        //返回当前年份-1900
+        console.log(dt.getYear());
+
+        //toLocaleString方法回: 2019‎年‎3‎月‎28‎日‎ ‎9‎:‎13‎:‎07
+        console.log(dt.toLocaleString());
+
+        //Date.parse的用法
+        console.log(Date.parse(dt));
+        console.dir(Date);
+        
+
+    </script>
+</body>
+</html>

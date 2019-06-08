@@ -1,0 +1,23 @@
+1. 什么是同源策略,和具体限制
+
+同源指相同的源,源包含三个部分: 协议,域名,端口,如果有任何一个部分不同,则源不同,那就是跨域了
+
+限制: 一个源的文档没有权利去操作另一个源的文档【ajax同源可以请求数据,但是不同源就请求不到】
+        具体体现: 
+	a.Cookie，LocalStorage无法获取
+	b.不能操作DOM
+	c.不能发送ajax请求.
+
+2. 前端蛞蝓的几种方式
+    
+    a. JSONP
+    b.WebSocket
+    c.CORS
+    d.Hash
+    e.postMessage
+
+
+
+
+
+注: https://www.cnblogs.com/smyhvae/p/8523576.html

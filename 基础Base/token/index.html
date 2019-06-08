@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>token</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // token
+        // 1.什么是token?
+        // 设置一段时间不用重新登陆(在这段时间中我们打开应用只验证token不用每次打开都去登陆)
+
+        // 2.token的流程
+        // 具体测试流程
+        //   用户在前端请求登录
+        //   在后台验证通过后根据用户id生成token
+        //   请求返回时将token带给前端并存在前端
+        //   以后前端再次请求时需带上token.
+        //   后台接收到token并验证,如果验证通过返回true,否则返回false.
+
+        // 注: 一打开app首先判断有无token,有token验证token没token弹窗登录页.改密码,卸载app都要
+        // 重新登陆应该都是把token搞掉了.
+
+    </script>
+</body>
+</html>

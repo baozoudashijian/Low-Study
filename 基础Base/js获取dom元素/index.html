@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS获取Dom元素</title>
+</head>
+<body>
+    <div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box"></div>
+    </div>
+    <div class="box"></div>
+    <div id="app">
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+
+    <script>   
+
+        //获取所有的div元素
+        var aDiv = document.getElementsByTagName('div');
+        console.log(aDiv);
+
+        //根据类名去获取元素
+        var cDiv = document.getElementsByClassName('box');
+        console.log(cDiv);
+
+        //根据id去获取元素
+        var aDiv = document.getElementById('app');
+        console.log(aDiv);
+
+        //找到元素的子元素
+        var aDivChild = aDiv.children
+        console.log(aDivChild);
+
+        //querySelector
+        var qDiv = document.querySelector('#app');
+        var qcDiv = document.querySelector('.box');
+        console.log(qDiv);
+        console.log(qcDiv);
+
+        //querySelectALL
+        var qaDiv = document.querySelectorAll('.box');
+        console.log(qaDiv);
+
+    </script>
+
+</body>
+</html>

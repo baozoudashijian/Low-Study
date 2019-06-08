@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>异步的理解</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //一、js中异步的理解
+        // 1.javaScript语言是一门 "单线程" 的语言,不像java语言,类继承Theard再来个theard.start就可以开辟一个线程
+        // 2.同步与异步的差别就在于这条流水线上各个流程的执行顺序不同,其实无论同步异步,无论如何,做事情的时候只有一条流水线(单线程).
+        // 3.错误的例子: 小明一边吃雪糕一边写作业,这完全没毛病,雪糕吃完了,作业也写完了,这就是异步,那就大错特错.
+        // 4.其实同步与异步,无论如何,做事情的时候都是只有一条流水线(单线程),同步与异步的差别就在在于这条流水线上各个流程的执行顺序不同.
+        
+        console.log(1);
+        
+        setTimeout(() => {
+            console.log(2);
+        }, 2000);
+
+        setTimeout(() => {
+            console.log(3);
+        }, 1000);
+
+        setTimeout(() => {
+            console.log(4);
+        }, 0);
+
+        console.log(5);
+
+        //5: 尽管我们设置了setTimeout中的等待事件为0,结果其中的function还是后执行.
+
+
+        //注: 于是,所有的任务可以分成两种,一种是同步任务,另一种是异步任务,同步任务指的是,在主线程上排队的任务,只有前
+            //一个任务执行完毕,才能执行后一个任务,异步任务指的是,不进入主线程,而进入任务队列的任务,只有等主任务执行完毕,
+            //任务队列的任务执行完毕,任务队列开始通知主线程请求执行任务,该任务才会进入主线程执行.
+
+
+        //一、实现异步编程的方式[异步编程时自己去实现的]
+
+        // 1.回调函数
+        function f1(a,b) {
+            console.log('买菜花了:'+a+'元','买菜花了:'+b+'元');
+            //一变成异步,就返回undefined;
+            setTimeout(() => {
+                console.log(a+b);
+                return a+b;
+            }, 3000);
+            
+        }
+        function f2(a) {
+            console.log('总共花了:'+a+'元');
+        }
+        f2(f1(34,32));//总共花了:undefined元// 然后四秒后返回a+b;
+
+        //使用回调函数的方法
+        function f3(a,b,callback) {
+            console.log('买菜花了:'+a+'元','买菜花了:'+b+'元');
+
+            setTimeout(() => {
+                console.log(a+b);
+                var res = a+b;
+                callback(res);
+            }, 3000);
+            
+        }
+        function f4(a) {
+            console.log('总共花了:'+a+'元');
+        }
+        f3(34,32,f4);
+
+        // 注: 把f4写成f3的回调函数.
+
+        //2.事件监听
+
+
+
+
+        //3.发布订阅模式
+
+
+
+        //4.Promise
+
+
+
+    </script>
+    
+</body>
+</html>

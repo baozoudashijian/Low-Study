@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可枚举属性与不可枚举属性</title>
+</head>
+<body>
+    
+
+
+
+
+    <script>
+        
+        //可枚举属性与不可枚举属性
+        //在JavaScript中对象的属性分为可枚举属性和不可枚举属性之分,他们是由属性的enumerable的值决定的,可枚举性决定了这个属性能否被for...in查找遍历到
+
+        var num = new Number();
+
+        // console.log(typeof num.toString());//证明Number对象上是有[属性]方法的.
+        for(var k in num) {
+            console.log(num[k]); //没有输出任何值. 因为Number中内置的属性是不可枚举的.所以不能被for...in访问到.
+        
+        }
+
+        // 1.判断是否为可枚举属性
+        // 能被for in 遍历出的属性,就是可枚举属性.
+        // propertyIsEnumerable() 方法判断实例属性和原型属性
+
+        function Person() {
+            this.name = "我是实例属性";
+            this.age = 19;
+        }
+        var p = new Person();
+        console.log(p.propertyIsEnumerable("name"));//true; 
+        Person.prototype.prop = "我是原型属性";
+        console.log(p.propertyIsEnumerable("prop"));//false
+
+        //注: 每个对象都有propertyIsEnumerable()方法判断实例属性和原型属性
+        // a. 这个属性是实例的,并且不属于原型
+        // b. 这个属性必须是可枚举的.
+        // 
+
+        // 2.改变属性的 "是否可枚举的属性"
+        function Student() {
+            this.name = "张荣杰";
+        }
+        Student.prototype = {
+            constructor: Student,
+            job: "web"
+        }
+
+        var std = new Student();
+
+        Object.defineProperty(std,"gender",{
+            value: 'man',
+            enumerable: false //如果为不可枚举属性在控制台上打印的就是黑色.
+        });
+
+        console.dir(std);
+
+        for(var key in std) {
+            console.log(key);
+        }
+
+        // 注: Object.defineProperty(对象,属性名,{属性的配置参数})
+        // Object.defindProperty()定义的属性好像实例属性,不在原型上的属性.
+
+        // for(var i in Window) {
+        //     console.log(Window[i]);
+        // }
+
+        // function Tempor() {
+        //     this.name = "temp";
+        // }
+        // Tempor.a = 1;
+        // Tempor.b = function() { console.log(11) }
+
+        // for(var j in Tempor) {
+        //     console.log(j);
+        // }
+        
+    </script>
+</body>
+</html>

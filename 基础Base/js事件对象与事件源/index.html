@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件对象与事件源</title>
+</head>
+<body>
+    
+    <div id="box">
+        <li>
+            <span>hello</span>
+        </li>
+        <li>
+            <p>is</p>
+        </li>
+        <li>me</li>
+    </div>
+
+    <script>
+        
+        // 事件对象与事件源
+
+        var box = document.getElementById('box');
+
+        box.onclick = function(ev) {
+
+            // 这里的ev就是事件对象
+            var ev = ev || window.event;
+
+            //这里就是事件源[源是源头的源]
+            var target = ev.target || ev.srcElement;
+
+            while(target.nodeName.toLowerCase() != 'div') {
+                if(target.nodeName.toLowerCase() == 'li'){
+                    console.log(111);
+                    break;
+                }
+                target = target.parentNode;
+            }
+        }
+
+    </script>    
+
+</body>
+</html>

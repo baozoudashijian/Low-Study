@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>前端跨域问题</title>
+</head>
+<body>
+    
+
+    <script>
+        // 1.什么是跨域?
+        // 了解跨域前需要了解什么是同源策略,同源策略有哪些限制
+        // 同源策略是指相同的源,源包含三个部分: 协议,域名,端口,如果有任何一个部分不相同,则源不同,那就是跨域了.
+        // 不同源的话不能发送ajax请求,也就是拿不到数据
+
+        // 2.前端解决跨域的几种方式
+        // a. jsonp
+        // jsonp 【jsonp指支持get请求,因为他是回调函数的方式】
+        // b.代理
+        // 例如 www.123.com/index.html需要调用www.456.com/server.php可以写一个接口www.123.com/server.php
+        // 去请求www.456.com/server.php并拿到返回值,然后在返回给index.html,这就是一个代理模式.相当于绕过了
+        // 浏览器,自然就不存在跨域的问题了
+        // c.服务端修改header
+        // 在php/node 接口脚本小加入下面两句
+        // header('Access-Control-Allow-Origin': '*')
+        // header('Access-Control-Allow-Method: POST,GET');
+        
+
+    </script>
+</body>
+</html>

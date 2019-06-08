@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加类名设置属性data-</title>
+</head>
+<body>
+    
+    <div class="container">
+
+    </div>
+
+    <script>
+        //给元素添加类名
+        var container = document.querySelector('.container');
+        container.className += ' container-wrap';
+        console.dir(container);
+
+        //给元素设置css属性
+        container.style.width = '100px';
+        container.style.height = '100px';
+        container.style.background = 'red';
+
+        //设置与获取data-属性.
+        container.dataset.age = 12;
+        container.dataset.name = '张荣杰';
+        console.dir(container.dataset.age);
+
+        //getAttribute 设置与获得属性.
+        console.log(container.getAttribute('data-name'));
+        console.log(container.setAttribute('data-name','朱熹'));
+        console.dir(container);
+
+    </script>
+
+</body>
+</html>

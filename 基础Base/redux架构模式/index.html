@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux架构模式</title>
+</head>
+
+<body>
+    <div id="title"></div>
+    <div id="content"></div>
+
+    <script>
+
+        const appState = {
+            title: {
+                text: 'React.js 小书',
+                color: 'red'
+            },
+            content: {
+                text: 'React.js 小书内容',
+                color: 'blue'
+            }
+        }
+        function renderApp(newAppState, oldAppState = {}) { //首次渲染没有oldAppState参数
+            if (newAppState === oldAppState) return;
+            console.log('render App...');
+            renderTitle(newAppState.title, oldAppState.title);
+            renderContent(newAppState.content, oldAppState.content);
+        }
+        function renderTitle(newTitle, oldTitle = {}) {
+            if (newTitle === oldTitle) return;
+            console.log('render Title...');
+            const titleDOM = document.getElementById('title');
+            titleDOM.innerHTML = newTitle.text;
+            titleDOM.style.color = newTitle.color;
+        }
+        function renderContent(newContent, oldContent = {}) {
+            if (newContent === oldContent) return;
+            console.log('render Content...');
+            const contentDOM = document.getElementById('content');
+            contentDOM.innerHTML = newContent.text;
+            contentDOM.style.color = newContent.color;
+        }
+        // function dispatch(action) {
+        //     switch (action.type) {
+        //         case 'UPDATE_TITLE_TEXT':
+        //             appState.title.text = action.text;
+        //             break;
+        //         case 'UPDATE_TITLE_COLOR':
+        //             appState.title.color = action.color;
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        // }
+        function createStore(reducer) {//reducer是一个纯函数
+            let state = null;
+            const listeners = [];
+            const subscribe = (listener) => listeners.push(listener);
+            console.log(listeners);
+            const getState = () => state;
+            const dispatch = (action) => {
+                // stateChanger(state, action); //之前是更改数据
+                state = stateChanger(state, action); //现在是覆盖原对象
+                console.log(listeners);
+                listeners.forEach((listener) => listener()); // 循环执行listeners中的每一个方法.
+            };
+            dispatch({}); //初始化数据;
+            return { getState, dispatch, subscribe } //形成闭包了.
+        }
+        function stateChanger(state, action) {
+            if(!state) {
+                return {
+                    title: {
+                        text: "React.js 小书",
+                        color: "red"
+                    },
+                    content: {
+                        text: 'React.js 小书内容',
+                        color: 'blue'
+                    }
+                }
+            }
+
+            switch (action.type) {
+                case 'UPDATE_TITLE_TEXT':
+                    // state.title.text = action.text;
+                    return { //构建新的对象并且返回.
+                        ...state,
+                        title: {
+                            ...state.title,
+                            text: action.text
+                        }
+                    }
+                    break;
+                case 'UPDATE_TITLE_COLOR':
+                    // state.title.color = action.color;
+                    return { //构建新的对象,并且返回
+                        ...state,
+                        title: {
+                            ...state.title,
+                            color: action.color
+                        }
+                    }
+                    break;
+                default:
+                    return state;
+            }
+        }
+
+        const store = createStore(appState, stateChanger);
+        let oldState = store.getState(); // 缓存旧的state;
+        store.subscribe(() => {
+            const newState = store.getState();
+            renderApp(newState, oldState);
+            oldState = newState;
+        }); //监听数据变化自动执行renderApp方法.
+
+        renderApp(store.getState()); //首次渲染页面
+        store.dispatch({ type: 'UPDATE_TITLE_TEXT', text: 'vue.js 小书1' });
+        store.dispatch({ type: 'UPDATE_TITLE_COLOR', color: 'blue' });
+
+        // 1.通过一个dispatch方法去改变值.
+        // 2.将appState和dispatch集中到一个地方store[将数据和改变的方法作为参数传入createStore];
+        // 3.检测数据变化 [监听者模式]
+        // 4.重复渲染,我们只更改了数据的title部分,但是content部分没有改变但是每次页回去重新渲染,我们需要优化一下.
+        // 5. 扩展运算符号ES6
+        const obj = { a: 1, b: 2 };
+        const obj2 = { ...obj };//浅复制obj对象
+        const obj3 = { ...obj, b: 2, c: 3 };//修改原对象的b属性增加c属性
+        console.log(obj2, obj3);
+        //appState和stateChager
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件委托</title>
+</head>
+<body>
+    
+    <ul id="box">
+        <li><a href="#">中国</a></li>
+        <li>美国</li>
+        <li>日本</li>
+    </ul>
+
+    <hr>
+
+    <div id="container">
+        <input type="button" id="add" value="添加">
+        <input type="button" id="remove" value="删除">
+        <input type="button" id="move" value="移动">
+        <input type="button" id="select" value="选择">
+    </div>
+
+    <hr>
+
+    <ul id="content">
+        <li>
+            <p>我是P标签</p>
+        </li>
+        <li>
+            <div>我是div标签</div>
+        </li>
+        <li>
+            <span>我是span标签</span>
+        </li>
+        <li>
+            我是li标签
+        </li>
+    </ul>
+
+
+    <script>
+        
+        // 事件委托
+        // 理解: 1. 事件委托 === 事件代理
+        
+        //为什么要用事件委托: 减少访问Dom次数 【访问dom次数越多,引起浏览器重绘与重排的次数越多】,用事件委托就是减少Dom操作. 
+        
+
+        // 案例一
+
+        var oLi = document.getElementsByTagName('li');
+
+        //多次执行DOM操作
+        // for(var i=0; i<oLi.length; i++) {
+        //     oLi[i].onclick = function() {
+        //         console.log(123);
+        //     }
+        // }
+
+        var oUl = document.getElementById('box'); 
+        
+        oUl.onclick = function(ev) {
+            var ev = ev || window.event;
+            console.dir(ev);
+            var target = ev.target || ev.srcElement;
+
+            if(target.nodeName.toLowerCase() == 'li') {
+                console.log(123);
+                console.log(target.innerHTML);
+            }
+        }
+
+        // 案例二
+
+        // var Add = document.getElementById("add");
+        // var Remove = document.getElementById("remove");
+        // var Move = document.getElementById("move");
+        // var Select = document.getElementById("select");
+
+        // Add.onclick = function() {
+        //     console.log('添加');
+        // };
+        // Remove.onclick = function() {
+        //     console.log("删除");
+        // };
+        // Move.onclick = function() {
+        //     console.log("移动");
+        // };
+        // Select.onclick = function() {
+        //     console.log("选择");
+        // }
+
+        var container = document.getElementById('container');
+
+        container.onclick = function(ev) {
+            var ev = ev || window.event;
+            var target = ev.target || ev.srcElement;
+
+            if(target.nodeName.toLowerCase() == "input") {
+                switch(target.id) {
+                    case 'add':
+                    console.log('添加');
+                    break;
+                    case 'remove':
+                    console.log('删除');
+                    break;
+                    case 'move': 
+                    console.log('移动');
+                    break;
+                    case 'select':
+                    console.log('查找');
+                    break; 
+                }
+            }
+            
+        }
+        // 注: 找到事件源的id和事件源的nodeName接待你名称.
+
+        // 案例三
+
+        var content = document.getElementById('content');
+
+        content.onclick = function(ev) {
+            console.log(1);
+            var ev = ev || window.event;
+            var target = ev.target || ev.srcElement;
+
+            while(target != 'content' ) {
+                
+                if(target.nodeName.toLowerCase() === "li") {
+                    console.log('li click');
+                    break;
+                }
+                target = target.parentNode;
+                
+            }
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

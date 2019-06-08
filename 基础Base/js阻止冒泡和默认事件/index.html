@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>阻止冒泡和默认事件</title>
+</head>
+<body>
+    
+    <div id="_div">
+        <ul id="_ul">
+            <li id="_li">
+                <a id="can" href="javascript:;">cancleBubble</a>
+            </li>
+            <li id="pre">preventDefault</li>
+        </ul>
+    </div>
+    <hr>
+    <h1>常见的默认事件</h1>
+    <a id="_link" href="http://www.baidu.com" target="_blank">点击跳转</a>
+    <!-- <a href="www.baidu.com" target="_blank">点击跳转</a>  不加上http://协议跳转的就是自的端口,在自己的目录下去找文件  -->
+
+
+    <script>
+        
+        var can = document.getElementById('can');
+        var oLi = document.getElementById('_li');
+        var oUl = document.getElementById('_ul');
+        var oDiv = document.getElementById('_div');
+
+
+        // 去除冒泡事件
+        can.onclick = function(ev) {
+
+            var ev = ev || window.event;
+
+            console.log(ev);
+
+            // 去除冒泡事件
+            // ev.cancelBubble = true;
+            // ev.stopPropagation();
+
+            //兼容性写法
+            if(ev && ev.stopPropagation) {
+                ev.stopPropagation();
+            }else {
+                ev.cancelBubble = true;
+            }
+            
+            console.log('a');
+        }
+        oLi.onclick = function() {
+            console.log('li');
+        }
+        oUl.onclick = function() {
+            console.log('ul');
+        }
+        oDiv.onclick = function() {
+            console.log('div');
+        }
+
+
+        //去除浏览器默认行为
+
+        // 方法一
+
+        //全局去掉默认事件
+        // document.oncontextmenu = function() {
+        //     return false;
+        // }
+        
+        //局部去掉默认事件
+        // oDiv.oncontextmenu = function() {
+        //     return false;
+        // }
+
+        //方法二
+        oDiv.oncontextmenu = function(ev) {
+            console.dir(ev);
+            for(var k in ev) {
+
+                // 判断私有属性hasOwnProperty
+                if(ev.hasOwnProperty(k)) {
+                    console.log(k,ev[k]);
+                }
+                
+            }
+            // 采用preventDefault的方式去除默认事件.
+            ev.preventDefault();
+        }
+
+
+
+        //注: 常见的默认事件
+        
+        // a标签的默认事件
+
+        var oLink = document.getElementById('_link');
+
+        //点击阻止a链接的跳转
+        oLink.onclick = function(ev) {
+            var ev = ev || window.event;
+            ev.preventDefault();
+        }
+
+        //阻止form表单的提交.
+        
+
+
+
+    </script>
+
+
+
+</body>
+</html>

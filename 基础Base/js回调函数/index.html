@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //JS回调函数
+        // 1. 在javacript对象中,函数是第一类对象,这意味着函数可以向对象一样按照第一类管理被使用.
+        // 2. 既然函数实际上是对象: 他们能被 "存储" 在变量中,就能作为函数参数被传递,就能在函数中被创建,就能从函数中返回
+        // 3. 函数式编程: 函数式编程就是使用函数作为变量.
+        // 4.高阶函数: 回调函数 === 高阶函数
+        //           eg 1:
+        //                $("#btn_1").click(function() {
+        //                      alert('关注成功'); //这里就是回调函数啊 
+        //                })
+        //          注: 回调函数在jQuery中非常常用.
+        //5. 回调函数既然是函数,函数就可以传值.
+        //6. 确保回调函数是一个函数
+        // if(typeof callback === "function") { callback(options) } 
+        // 
+        //
+        // 
+        
+        // 案例一
+        var friends = ['林俊杰','周杰伦','林志炫','古田乐'];//全局变量挂在在window上
+
+        friends.forEach(function(item,index) {
+            console.log('我是' + item); //这里也是使用了回调函数.
+        });
+
+        // 案例二 【回调函数可以传递值】
+
+        // 回调函数
+        function logStuff(userData) {
+
+            if(typeof userData === "string") {
+                console.log(userData);
+            }
+            if(typeof userData === "object" ) {
+                for(var key in userData) {
+                    console.log(key,userData[key]);
+                }
+            }
+
+        }
+
+        function getInput(options,callback) {
+            //执行回调函数
+            callback(options);
+
+        }
+
+        getInput({name: 'Rach',speciality: 'Javascript'}, logStuff);
+
+        // 案例三 【注意callback中的this指向】
+        var clientData = {
+            id: 134354,
+            fullName: 'Not Set',
+            setUserName: function(firstName, lastName) {
+                this.fullName = firstName + " " + lastName;
+                console.log(this.fullName);
+            }
+        }
+        // clientData.setUserName('alan','work'); // alan work 【this指向实例】;
+
+         function getUserInput(firstName,lastName,callback,callbackObj) {
+
+            // callback(firstName,lastName);//此时方法中的this指向window,至于能console出正确的结果就是在window上添加了fullname属性,打印出的也是window上的fullname属性
+            callback.apply(callbackObj,[firstName,lastName]);//修改后
+
+         }
+
+        //  getUserInput('trump','work',clientData.setUserName);//修改前
+         getUserInput('adel','someonelikeyou',clientData.setUserName,clientData);
+         console.log(clientData.fullName);// not set
+
+         // 案例四 【允许多重回调函数】
+         
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

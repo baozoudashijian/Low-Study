@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象-继承</title>
+</head>
+<body>
+    
+
+
+    <script>
+        
+        // 面向对象 - 继承
+
+        // javascript 面向对象(实现继承的几种的方式);
+
+        // 一、原型链继承
+
+        function Person(name) {
+            this.name = name;
+        }
+        Person.prototype.getName = function() {
+            return this.name;
+        }
+
+        function Parent(age) {
+            this.age = age;
+        }
+
+        Parent.prototype = new Person('张荣杰'); //子构造函数的原型 = 实例一个父类; 实现继承.
+
+        Parent.prototype.getAge = function() {
+            return this.age;
+        }
+
+        var result = new Parent(22);
+
+        console.log(result.getName()); //张荣杰
+        console.log(result.getAge()); //22
+        console.log(result.name);
+
+        // 注: 
+            // 核心: 将父类的实例作为子类的原型;
+            // 缺点: 父类新增原型方法/原型属性,字类都能访问到,父类一变其他的都变了.
+
+
+
+        // 二、构造继承
+
+        // 实例属性方法: 存在与构造函数中的属性与方法;
+        // 原型属性方法: 存在与 .prototype 上的属性与方法;
+        
+        function Person1 (name) {
+            this.name = name;
+            this.friends = ['小李','小红'];
+            this.getName = function() {
+                return this.name;
+            }
+        }
+
+        Person1.prototype.getNameCopy = function() {
+            return this.name;
+        }
+
+        function Parent1(age) {
+            Person1.call(this,'老明');
+            console.log(this);
+            this.age = age;
+        }
+
+        var result1 = new Parent1(22);
+
+        console.log(result1.name);
+        console.log(result1.friends[0]);
+        result1.getName();
+        // result1.getNameCopy(); //不能访问到父类原型上的属性与方法.
+
+        // 注: 
+            // 核心: 使用父类的构造函数来增强字类的实例,等于复制父类的实例属性给字类;
+            // 缺点: 方法都在构造函数中定义,只能继承父类的实例属性和方法,不能继承原型的属性和方法,无法实现函数服用,每个子类都有父类实例函数的副本,影响性能.
+
+        
+        // 三、组合继承
+        // https://www.cnblogs.com/chaixiaozhi/p/8515087.html
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

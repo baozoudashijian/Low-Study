@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断数据类型的方式</title>
+</head>
+<body>
+    
+
+
+    <script>
+        
+        //判断数据类型的几种方式
+
+        // 1.typeof
+        console.log(
+            typeof 123, //number 
+            typeof 'white', //string
+            typeof false, //boolean
+            typeof [1,2,3], // object
+            typeof {a:1,b:2}, // object
+            typeof function() {}, // function
+            typeof undefined, // undefined
+            typeof null, // object
+            typeof new Date(), //object
+            typeof /^ [a-zA-Z]{5,20}$/, //object
+            typeof new Error() // object
+        );
+
+        // 注: typeof可以检测基本数据类型 number, string, boolean, undefined, 引用类型只可以检测一个function.
+            // 其他的返回的都是object.
+
+
+        // 2.instanceof
+        console.log(
+            123 instanceof Number, //false
+            'asd' instanceof String, //false
+            false instanceof Boolean, //false
+            [1,2,3] instanceof Array, //true
+            {a:1} instanceof Object, //true
+            function() {} instanceof Function, //true
+            undefined instanceof Object, //false
+            null instanceof Object, //false
+            new Date() instanceof Date, //true
+            /^ [a-zA-Z]{5,20}$/ instanceof RegExp, //true
+            new Error() instanceof Error //true
+        );
+
+        // 注: 判断构造函数的原型(prototype)是否在给定对象的原型链上.
+
+        // 3. constructor
+        var num = 123;
+        var str = "abc";
+        var bool = true;
+        var arr = [1,2,3,4];
+        var json = {name: '张荣杰'};
+        var func = function() {};
+        var und = undefined;
+        var nul = null;
+        var date = new Date();
+        var reg = /^ [a-zA-Z]{5,20}$/;
+        var error = new Error();
+        
+        function Person() {
+
+        }
+
+        var tom = new Person();
+
+        console.log(
+            tom.constructor == Person, //true
+            num.constructor == Number, //true
+            str.constructor == String, //true
+            bool.constructor == Boolean, //true
+            arr.constructor == Array, //true
+            json.constructor == Object, //true
+            func.constructor == Function, //true
+            date.constructor == Date, //true
+            reg.constructor == RegExp, //true
+            error.constructor == Error //true
+        );
+
+        // 注: 通过原型对象上的属性constructor指向构造函数的方式去判断.
+
+
+
+
+
+    
+    </script>
+
+</body>
+</html>

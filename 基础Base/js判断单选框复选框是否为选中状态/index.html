@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断单选框复选款是否为选中状态</title>
+</head>
+
+<body>
+
+    <input type="checkbox" name="hobby" id="">篮球
+    <input type="checkbox" name="hobby" id="">足球
+    <input type="checkbox" name="hobby" id="">棒球
+    <input type="checkbox" name="hobby" id="">网球
+    <button onclick="fn('hobby')">验证</button>
+
+    <hr>
+
+    <input type="radio" name="food" id="">青菜
+    <input type="radio" name="food" id="">萝卜
+    <input type="radio" name="food" id="">黄瓜
+    <input type="radio" name="food" id="">茄子
+
+    <button onclick="fn('food')">验证</button>
+
+    <script>
+
+        //判断复选框是否被选中.
+        function fn(na) {
+            var hb = document.getElementsByName(na);
+            // console.log(hb.reverse());//这里证明他是一个伪数组
+
+            // 将伪数组转成数组
+            var arr = [].slice.apply(hb);
+
+            //使用some的方法去判断
+            var res = arr.some(item => item.checked === true);
+            console.log(res);
+        }
+    </script>
+
+</body>
+
+</html>

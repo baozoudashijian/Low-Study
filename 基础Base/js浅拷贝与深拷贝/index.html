@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浅拷贝与深拷贝</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //浅拷贝与深拷贝
+
+        //浅拷贝: 浅拷贝是拷贝一层,如果数据是基本数据类型,会拷贝其本身,如果是引用数据类型只会拷贝其引用,对象的改变
+                 //会反应到拷贝对象上.
+        //深拷贝: 深拷贝会拷贝多层,即使有引用对象,更改原对象的时候,拷贝对象也不会发生改变.
+        
+        
+        //转成浅拷贝的方法
+        //  method 1
+        function simpleClone(initalObj) {
+            var obj = {};
+
+            for(var k in initalObj) {
+                obj[k] = initalObj[k];
+            }
+
+            return obj;
+        };
+
+        var obj = {
+            a: "hello",
+            b: {
+                a: "world",
+                b: 21
+            },
+            c: ["hongkong","america","china"],
+            d: function() {
+                alert("hello world");
+            }
+        }
+
+        var cloneObj = simpleClone(obj);
+        
+        
+        // 更改克隆对象中的属性,看看哪些属性值会发生变化
+        cloneObj.a = "changed";// 原对象没有改变
+        cloneObj.b.a = "changed",
+        cloneObj.b.b = 44;
+        cloneObj.c = ["a","b","c"];// 原对象没有改变
+        cloneObj.d = function(a) { alert("changed") };// 原对象没有改变
+        console.log(cloneObj);
+        console.log(obj);
+
+        //注: 浅拷贝就是拷贝了一层,除了对象是拷贝的引用类型,其他都是直接将值传递,有自己的内存空间的.
+             // 为什么 数组 方法 为什么不会改变?
+             // 答: 因为数组方法只有一层,不像object可以有多层.
+
+
+        //method 2
+
+        var obj1 = {
+            a: "hello",
+            b: {
+                a: "hello",
+                b: 22
+            }
+        };
+        var cloneObj1 = Object.assign({},obj1);//使用ES6的方法实现浅拷贝;
+        console.log(cloneObj1);
+
+        cloneObj1.a = "changed";//没改变
+        cloneObj1.b = {};//只复制一层的话可以考虑
+        // cloneObj1.b.a = "changed";//改变了
+
+        console.log(obj1);
+
+        // 转成深拷贝的方法.
+        // method 1
+        var obj2 = {body: {a: 10}};
+        var obj3 = JSON.parse(JSON.stringify(obj2));
+
+        obj3.body.a = 20;
+        console.log(obj2,obj3);
+
+        // 注: 可以实现深拷贝的方法
+        //  缺点: 1.会抛弃对象的constructor.也就是深拷贝之后,不管这个对象原来的构造函数是什么,在深拷贝之后都会变成Object.
+                //2.这种方法只能处理能够被json直接表示的数据结构.regexp和function是无法转成json【最大的局限性】.
+
+
+
+        // method2
+        function deepClone(initalObj, finalObj) {
+            var obj = finalObj || {};
+            for(var i in initalObj) {
+                if(typeof initalObj[i] === 'object') {
+                    obj[i] = (initalObj[i].constructor === Array) ? [] : {};
+                    // arguments.callee(initalObj[i],obj[i]);
+                    deepClone(initalObj[i],obj[i]); //都是使用递归写法不同
+                }else {
+                    obj[i] = initalObj[i];
+                }
+            }
+            return obj;
+        }
+        var str = {};
+        var obj4 = {a: {a: "hello", b: 21,c: {d:'world',f: 2}}};
+
+        deepClone(obj4,str);
+        str.a.a = "changed";
+        str.a.b = "changed";
+        str.a.c.d = "del";
+        console.log(str,obj4);// 可以的至此实现了deep copy;
+
+        //注:防止遇到两个互相引用的对象,会出现死循环的情况‘
+        function deepClone2 (initalObj, finalObj) {
+            var obj = finalObj || {};
+            for(var i in initalObj) {
+                var prop = initalObj[i];
+                if(prop === obj) {
+                    continue;
+                }
+                if(typeof prop === 'object') {
+                    obj[i] = (prop.constructor === Array) ? [] : {};
+                    arguments.callee(prop,object[i]);
+                }else{
+                    obj[i] = prop;
+                }
+            }
+            return obj;
+        }
+        
+        // method 3 
+        function deepClone3(initalObj, finalObj) {
+            var obj = finalObj || {};
+            for(var i in initalObj) {
+                var prop = initalObj[i];
+                if(prop === obj) {
+                    continue;
+                }
+                if(typeof prop === 'object') {
+                    obj[i] = (prop.constructor === Array) ? [] : Object.create(prop);
+                }else {
+                    obj[i] = prop;
+                }
+            }
+            return obj;
+        }
+
+        var str1 = {};
+        var obj5 = {b:{a:1,d:'str'}};
+        deepClone3(obj5,str1);
+        console.log(str1,obj5);
+
+
+
+
+
+
+
+        
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>

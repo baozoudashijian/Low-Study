@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form表单的提交</title>
+</head>
+<style>
+    * { margin: 0; }
+    .search_panel {
+        position: relative;
+        width: 1200px;
+        margin: 100px auto;
+        background-color: white;
+    }
+    .regForm-item-tit {
+        width: 90px;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+    }
+    .regForm-iten-ct {
+        padding-left: 110px;
+    }
+</style>
+<body>
+    
+    <div class="search_panel">
+        <form action="http://www.baidu.com" target="_blank" method="Get">
+            <dl id="nameDl">
+                <dt class="regForm-item-tit">
+                    <span class="txt-impt">*</span>
+                    邮箱地址
+                </dt>
+                <dd class="regForm-iten-ct">
+                    <input type="text" class="ipt" name="id" value="12545" >
+                    <strong class="txt-14">@</strong>
+                    <select name="mainDomain" id="mainDomainSelect">
+                        <option selected="selected" value="163.com">163.com</option>
+                        <option value="126.com">126.com</option>
+                        <option value="yeah.net">yeah.net</option>
+                    </select>
+                    <div class="nameTips">
+                        <span class="txt-tips">6~18个字符，可使用字母、数字、下划线，需以字母开头</span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dd>
+                    <input type="submit" value="提交">
+                </dd>
+            </dl>
+            <dl>
+                <dd>
+                    <input type="button" value="Ajaxget" id="btn">
+                </dd>
+            </dl>
+            <dl>
+                <dd>
+                    <input type="button" value="Ajaxpost" id="btn2">
+                </dd>
+            </dl>
+        </form>
+    </div>
+
+
+
+
+
+
+
+    <script>
+
+        // Form 提交表单
+        // 出现以下几种情况
+        
+        // 情况一
+        // 使用Submit && Get 按钮提交form表单
+
+        //  注: 1.点击提交按钮 浏览器会将 form表单中的表单元素 name和value拼接[https://www.baidu.com/?id=12545&mainDomain=163.com].
+        //      2.如果不用ajax的话,你提交表单以后,要么在原来的窗口刷新页面处理,要么就在新窗口处理,不管如何,最终返回的数据都要
+                //   通过以参数的形式传到原页面上来.表单直接提交的话是不会返回数据的.
+
+
+        // 情况二
+        // 使用Submit && POST 按钮提交form表单
+        
+        // 注: Network中看不到发送的请求 [有可能是会刷新的缘故吧]
+
+
+        // 情况三
+        // 使用 Ajax && get 按钮提交form表单
+        
+        // 注: get是字符串凭借
+
+        var btn = document.getElementById('btn');
+        var id = document.querySelector('.ipt');
+        var sel = document.querySelector('#mainDomainSelect');
+        var btn2 = document.getElementById('btn2');
+
+        btn.onclick = function() {
+            
+            var xhr = new XMLHttpRequest();
+            console.log(sel);
+            xhr.open('get','?'+id.name+'='+id.value+'&'+sel.name+'='+sel.value);
+
+            xhr.send(null);
+
+            xhr.onreadystatechange = function(data) {
+                if(xhr.readyState === 4 && xhr.response === 200) {
+                    console.log(data);
+                }
+            }
+
+        }
+
+        // 情况四
+        // 使用 Ajax && post 按钮提交form表单
+        
+        // 注: 是对象形式的字符串.
+
+        btn2.onclick = function() {
+            
+            
+
+        }
+
+
+
+        
+
+
+
+
+    </script>
+
+
+</body>
+</html>

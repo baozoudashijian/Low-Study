@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSvalueof方法</title>
+</head>
+<body>
+    
+
+    <script>
+
+        //value of 方法
+
+        //数组
+        var arr = ['CodePlayer',true,12,-5];
+        console.dir(arr);
+        console.log(arr.valueOf());//['CodePlayer',true,12,-5]
+        console.log(arr.valueOf() === arr);//true
+
+        //Date
+        var date = new Date(2013,7,18,11,59,230);
+        console.dir(date);//从写了valueOf方法
+        console.log(date);//Sun Aug 18 2013 12:02:50 GMT+0800 (中国标准时间)
+        console.log(date.valueOf());//1376798570000
+
+        //Number
+        var num = new Number(15.26540);
+        console.dir(num);
+        console.log(num.valueOf());//15.2654
+
+        //Boolean
+        var bool = new Boolean(true);
+        console.dir(bool);
+        console.log(bool.valueOf());//true
+
+        //Function
+        function foo() {
+
+        }
+        console.dir(foo);
+        console.log(foo.valueOf());
+
+        //Object
+        var obj = {name: '张荣杰', age: 17};
+        console.dir(obj);
+        console.log(obj.valueOf());
+
+        //String
+        var str = new String('dawdadawd');
+        console.dir(str);
+        console.log(str.valueOf());
+
+
+        //注: 1.valueOf方法大概是返回对象本省,有的类重写了Object.valueOf方法,有的没有
+        //    2.  var str = new String(); 这样可以看清这个方法,不要去用语法糖的形式去编写.
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js字符串与数值类型相互转换</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        //字符串转成数值类型
+
+        //转换函数
+        var str = '12sdw';
+        console.log(parseInt(str));//12 parseFloat
+
+        //强制类型转换
+        // var str2 = '12355sss';
+        // console.log(Number(str2));//强制类型不能转换含字母的字符串类型 但不会报错 返回的是 NaN 类型
+        var str2 = '12355';
+        console.log(Number(str2));
+
+        // JavaScript是弱语言类型进行转换
+        var str3 = '1233';
+        console.log(typeof (str3-0));//这样也可以转化成数字类型.
+
+        //数字类型转化成字符串
+
+        //转换方法toString
+        var num = 1;
+        console.log(typeof num.toString());
+
+        //强制类型转换
+        var num2 = 2;
+        console.log(typeof String(num2));
+
+        // JavaScript是弱语言类型进行转换
+        var num3 = 3;
+        console.log(typeof (num3+""));
+
+    
+    
+    </script>
+</body>
+</html>
