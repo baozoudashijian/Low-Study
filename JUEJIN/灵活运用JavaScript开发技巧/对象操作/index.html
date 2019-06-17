@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象操作</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        // 对象操作
+
+        // 1.克隆对象
+        const cloneObj = { a: 0, b: 1, c: 2 };
+        // const resCloneObj = {...cloneObj}; // 使用扩展运算符克隆对象
+        const resCloneObj = JSON.parse(JSON.stringify(cloneObj));
+        resCloneObj.a = 100;
+        console.log(resCloneObj, cloneObj);
+
+        // 2.合并对象
+        const concatObjOne = { a: 1 };
+        const concatObjTwo = { b: 2 };
+        console.log({...concatObjOne,...concatObjTwo});//合并对象
+
+        // 3.获取环境变量
+        const env = 'dev';
+        const link = {
+            dev: "Development Address",
+            test: "Testing Address",
+            prod: "Production Address"
+        }[env];
+        console.log(link);
+
+        // 4.对象变量属性
+        const flag = true;
+        const varObj = {
+            a: 0,
+            b: 1,
+            [flag ? "c" : "d "]: 100
+        }
+        console.log(varObj);
+
+        // 5.创建纯空对象
+        const KongObj = Object.create(null); // 无原型对象__prototype
+        const primaryObj = new Object(); // 有__prototype
+        Object.prototype.a = 0;
+        console.log(KongObj);
+        console.log(primaryObj);
+
+        // 6.删除对象的无用属性.
+        const uselessObj = {a:0, b:1, c:2};
+        const {a,...rest} = uselessObj; //成功去除a属性;
+        console.log(rest);
+
+
+
+
+    </script>
+
+</body>
+
+</html>

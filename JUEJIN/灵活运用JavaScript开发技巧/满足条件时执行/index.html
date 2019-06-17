@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>满足条件时执行</title>
+</head>
+<body>
+    
+    <script>
+        
+        //满足条件时执行
+
+        const flagA = true;
+        const flagB = false;
+
+        let func = () => {console.log(123)}
+
+        (flagA || flagB) && func(); //满足A或则B, 就执行方法;
+        (flagA || !flagB) && func();
+
+        // 为非假值执行
+        // let jia = undefined;// undefined "" null 0 false NaN;
+        let jia = 1; 
+        jia && func() // jia为非假值执行
+
+        // 数组不为空时执行
+        // const arr = [1,2,3];
+        let arr = [];
+        arr.length && func(); //数组不为空时执行方法
+
+
+
+    </script>
+
+
+</body>
+</html>

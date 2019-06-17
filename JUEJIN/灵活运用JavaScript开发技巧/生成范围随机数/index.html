@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生成范围随机数</title>
+</head>
+<body>
+    
+    <script>
+        
+        // 生成范围随机数;
+        const RandomNum = (min, max) => Math.floor(Math.random() * (max-min + 1)) + min;
+        const num = RandomNum(1,10);
+        const num2 = RandomNum(1,6);
+        const num3 = RandomNum(3,5);
+        console.log(num);
+        console.log(num2);
+        console.log(num3);
+        
+        
+    </script>
+
+
+
+</body>
+</html>

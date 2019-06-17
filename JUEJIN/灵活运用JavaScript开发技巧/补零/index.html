@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>补零</title>
+</head>
+<body>
+    
+
+    <script>
+        // 补零
+        const fillZero = (len) => (num) => num.toString().padEnd(len,"0");
+        
+        let fillZeroFour = fillZero(10); // 定义一个10位数的数字,如果不够长度我们补上;
+        let res = fillZeroFour(2323);
+        let res2 = fillZeroFour(1023);
+        console.log(res); //2323000000
+        console.log(res2); //1023000000
+        
+        // 使用闭包
+
+        
+    </script>
+</body>
+</html>

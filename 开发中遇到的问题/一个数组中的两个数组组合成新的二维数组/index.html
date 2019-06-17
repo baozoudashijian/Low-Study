@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>将数组两个一组</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // 将数组两个两个一组,组成新的数组.
+        let arr = [1,2,3,4,5,6,7,8];
+        let res = [];
+        for(let i=0; i<arr.length; i+=2) {
+            let temp = []; // 建立的临时数组,每次循环前都会清空数组.
+            temp.push(arr[i], arr[i+1]); //先把分组元素放入临时数组;
+            res.push(temp);// 最终push到我们保存数据的数组;
+        }
+        console.log(res);
+
+        //封装了一个这个方法,这个方法是纯函数,只依赖你传进来的数组;
+        let sortDouble = arr => {
+            let res = [];
+            for(let i=0; i<arr.length; i+=2) {
+                let temp = [];
+                temp.push(arr[i],arr[i+1]);
+                res.push(temp);
+            }
+            return res;
+        }
+        console.log(sortDouble([1,2,3,4,5,6,7]));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>精确小数</title>
+</head>
+<body>
+    
+    <script>
+        
+        // 精确小数
+        const RoundNum = (num,decimal) => Math.round(num * 10 ** decimal) / 10 ** decimal;
+        const num = RoundNum(1.292,1); //1.7
+        console.log(num);
+
+        //注: 不是特别清楚作者的用意;
+
+    
+
+    </script>
+
+
+</body>
+</html>

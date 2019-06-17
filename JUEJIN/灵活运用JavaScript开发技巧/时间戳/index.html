@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>时间戳</title>
+</head>
+<body>
+    
+    <script>
+        
+        // 时间戳
+        const timestamp = +new Date("2019-04-10");
+        console.log(timestamp); // 获得时间戳;
+
+        const timestamp2 = new Date("2019-06-10"); //Mon Jun 10 2019 08:00:00 GMT+0800 (中国标准时间)
+        const timestamp3 = new Date(2019-06-10); //Thu Jan 01 1970 08:00:02 GMT+0800 (中国标准时间) // 这是一种错误的写法,请问传入的是什么数据类型;
+        const timestamp4 = new Date(); //Mon Jun 10 2019 09:11:33 GMT+0800 (中国标准时间) //不传参数获得的是现在的时间.
+        console.log(timestamp2); // 传入时间字符串, 返回指定时间的时间戳.
+        console.log(timestamp3); // 传入参数类型错误,不是EMCASCRIPT指定的数据类型,返回1970.01.01;
+        console.log(timestamp4); // 不传参数返回现在的时间;
+
+        // 获得当前时间戳的方法
+
+        // FUNC1 //获得【当前】时间戳
+        let timestamp5 = Date.parse(new Date());
+        let timestamp6 = Date.parse(new Date("2019-04-10"));
+        console.log(timestamp5);//new Date不传参数,获得当前时间的时间戳.
+        console.log(timestamp6);//获得指定时间[Date对象传入参数]的时间戳;
+
+        // FUNC2 //获得【当前】时间戳
+        let timestamp7 = (new Date()).valueOf();
+        console.log(timestamp7);
+
+        // FUNC3 //获得【当前】时间戳
+        let timestamp8 = (new Date()).getTime();
+        console.log(timestamp8);
+
+        //注: FUNC1不太精确 最后几位数字会以 "0" 补充; 建议直接使用getTime()方法.
+
+        
+    </script>
+
+
+
+</body>
+</html>

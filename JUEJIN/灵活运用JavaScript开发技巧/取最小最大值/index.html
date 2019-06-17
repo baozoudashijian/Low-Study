@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>取最小最大值</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // 取最小最大值
+        const arr = [3,8,102,,30]; // NaN; 数组中不能出现空元素,否则是NaN;
+        // const arr = [3,8,102,30];
+        const min = Math.min.apply(null,arr);
+        console.log(arr,min);// NaN
+
+
+        // Math.min.apply(null,arr); 版本;
+        const arr2 = [7,89,34,2];
+        console.log(Math.min.apply(null,arr2)); // 2
+        console.log(Math.max.apply(null,arr2)); // 89
+
+        // 扩展运算符版本
+        const arr3 = [78,94,23,79];
+        console.log(Math.min(...arr3)); // 23
+        console.log(Math.max(...arr3)); // 94
+
+        // 注: 新增一种扩展运算符的方式判断数组最大最小值.
+
+        
+
+
+    </script>
+
+</body>
+</html>

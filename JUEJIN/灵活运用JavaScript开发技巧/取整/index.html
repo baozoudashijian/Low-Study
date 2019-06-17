@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>取整</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // 取整: 代替正数的Math.floor(), 代替负数的Math.ceil();
+
+        // ~~ 代替Math.floor(); 
+        const num1 = ~~ 1.69; // 1
+        const num2 = ~~1.35; // 1
+        console.log(num1,num2);
+
+        //
+        const num3 = 1.69 | 0; // 1
+        const num4 = 1.69 >> 0; // 1
+        const num5 = -1.89 | 0; // -1
+        console.log(num3,num4,num5);
+
+        // 注: 这几种方式都可以取, 正数Math.floor() 负数Math.ceil();
+
+
+        
+    
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组操作</title>
+</head>
+<body>
+    
+    <script>
+        
+        // 1. 克隆数组;
+        const cloneArr = [1,null,3,,4];
+        console.log([...cloneArr]);
+
+        // 2.合并数组
+        const combineOneArr = [1,2,3];
+        const combineTwoArr = [4,5,6];
+        const combineResArr = [...combineOneArr,...combineTwoArr];
+        console.log(combineResArr);
+
+        // 3.去重数组
+        const repeatArr = [...new Set([0,1,2,1,null,null])];
+        console.log(new Set([0,1,2,1,null,null]));
+        console.log(repeatArr);
+
+        // 4.混淆数组
+        const mixArrSlice = [0,1,2,3,4,5,6,7].slice().sort(() => Math.random() - .5);
+        const mixArr = [0,1,2,3,4,5,6,7].sort(() => Math.random()- .5);
+        // console.log([0,1,2,3,4,5,6,7].slice());
+        console.log(mixArrSlice);
+        console.log(mixArr);
+
+        // 5.清空数组
+        const deleteArr = [1,2,3];
+        console.log(deleteArr);
+        deleteArr.length = 0;
+        console.log(deleteArr);
+
+        // 6.截断数组
+        const cutOffArr = [1,2,3,4,5,6,7,8];
+        cutOffArr.length = 5;
+        console.log(cutOffArr);//通过lenth方法截断数组[改变原数组];
+
+        // 7.过滤空值
+        const filterArr = [undefined, null, "", 0, false, NaN, 1, 2].filter(Boolean);
+        console.log(filterArr);
+
+        // 8.数组首部插入成员
+        let shiftArr = [1,2,3,4];
+        // shiftArr.unshift(0);
+        console.log(shiftArr);
+        let resConCatArr = [0].concat(shiftArr);//concat 方法不改变原数组;
+        console.log(resConCatArr);
+        let resArrK = [0,...shiftArr];
+        console.log(resArrK);
+
+        // 9.获取数组随机成员
+        const randomArr = [1,2,3,4,5,6,7,8];
+        let resRandomArr = randomArr[Math.floor(Math.random() * randomArr.length)];
+        console.log(resRandomArr);
+
+        // 10.创建指定长度的数组
+        const pointLenArr = [...new Array(3).keys()];
+        pointLenArr.push(48);
+        console.log(new Array(3));
+        console.log(pointLenArr);
+
+    </script>
+
+</body>
+</html>

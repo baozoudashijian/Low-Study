@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断数据类型</title>
+</head>
+<body>
+    
+
+
+    <script>
+    
+        // 判断数据类型
+
+        let arr = [1,2,3,4,5];
+        let obj = {};
+        const typeIs = type => foo => Object.prototype.toString.call(foo) == `[object ${type}]`;
+        let typeArr = typeIs('Array');
+        let typeObject = typeIs('Object');
+        console.log(typeArr(arr));
+        console.log(typeObject(obj),typeObject(arr));
+
+        // 注: Object.property 可以直接这样写,【有可能因为他是根对象,所以这么设计】
+
+        
+    </script>
+</body>
+</html>
