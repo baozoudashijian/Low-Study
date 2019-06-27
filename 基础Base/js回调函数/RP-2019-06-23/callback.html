@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        /// 深入理解回调函数.
+
+        // 把函数当作一个参数传递进去,这就是回调函数;
+        Array.prototype.forSelf = function(callback) {
+            for(var i=0; i<this.length; i++) {
+                callback(this[i],i);
+            }
+        }
+        let res = [];
+        [1,2,3,4,5].forSelf((item) => {
+            res.push(item*2);
+        });
+        console.log(res);
+        
+
+
+
+    
+    </script>
+
+
+</body>
+</html>

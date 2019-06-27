@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手动实现实现Object.assign</title>
+</head>
+
+<body>
+
+
+
+    <script>
+
+        // Object.assign();
+        // Object.assign方法用于对象的合并
+
+        var t = { a: 1 };
+        var s1 = { b: 2 };
+        var s2 = { c: 3 };
+        console.log(t, 'Object.assign 前');
+        console.log(Object.assign(t, s1, s2)); //{a: 1, b: 2, c: 3};
+        console.log(t, 'Object.assign 后');
+
+        //Object.assign 克隆对象
+        console.log(Object.assign({}, t), '克隆对象');
+
+
+        // 手动实现Object.assign(); // 完全自己的想法;
+
+        var s3 = { a: 1, b: 2, c: 3 }
+        var s4 = { d: 5, e: 6 };
+        var s8 = { j: 7, k: 8 };
+        Object.myAssign = function () {
+            var args = arguments;
+            console.log(arguments);
+            for (var i = 0; i < args.length; i++) {
+                for (var key in args[i + 1]) {
+                    args[0][key] = args[i + 1][key];
+                }
+            }
+        }
+        Object.myAssign(s3, s4, s8);
+        console.log(s3);
+
+        Object.assign = null;
+        // 手动实现Object.assign(); // 大神实现;
+        console.log(typeof Object.assign); // function;
+        if(typeof Object.assign != 'function') {
+            (function() {
+
+                Object.assign = function(target) {
+                    console.log(target); // {a: 10}
+                    if(target === undefined || target === null) {
+                        throw new TypeError('Cannot convert undefined or null to object');
+                    }
+                    var output = Object(target); // 这种写法第一次见[object String];
+                    console.log(output);//{a: 100}
+                    for(var index = 1; index < arguments.length; index++) {
+                        var source = arguments[index];
+                        if(source !== undefined && source !== null) {
+                            for(var key in source) {
+                                if(source.hasOwnProperty(key)) {
+                                    output[key] = source[key];
+                                }
+                            }
+                        }
+                    }
+                    console.log(output,'output');
+
+                }
+
+
+            })();
+        }
+        
+        let j = { a: 100 };
+        let k = { b: 200 };
+        let l = { c: 300 };
+        Object.assign(j, k, l);
+
+        console.log(Object.prototype.toString.call(Object('aaa'))); // [object String];
+    </script>
+
+
+</body>
+
+</html>

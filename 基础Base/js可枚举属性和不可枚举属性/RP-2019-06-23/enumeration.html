@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可枚举属性与不可枚举属性</title>
+</head>
+<body>
+    
+
+    <script>
+
+        /// 可枚举属性与不可枚举属性;
+        // JavaScript中性分为可枚举属性和不可枚举属性;
+        // 可枚举与不可枚举由属性的enumerable的值决定;
+
+        var num = new Number(2);
+        var num2 = new Number(3);
+        console.log(num); // {2}
+        console.log(num2); // {3}
+        console.log(num + num2); //5
+        // PS: 明明是两个对象为什么可以相加减, 因为我们之前分析过valueof,toString
+        // 2 + 3 = 5 // 因为重写了toString和valueOf方法, 这种方式计算应该是调用了 valueOf方法;
+        // 3 + '3' = '33' // 因为重写了toString和valueOf()方法,这种方式计算应该是调用了 toString方法;
+        num['name'] = "zhan";
+        for(var key in num) {
+            console.log(key); // 添加的name属性会遍历出来;
+        }
+
+        /*-------------------------------------------------华丽分割线-------------------------------------------------*/
+
+        // 如何判断一个属性是否为可枚举属性?
+        // 能被for...in 遍历出的属性是可枚举属性;
+        // propertyIsEnumerable() 方法判断是否
+        function Person() {
+            this.name = "张荣杰";
+            this.age = 18;
+        }
+        Person.prototype.gender = "男";
+        var p = new Person();
+        console.log(p);
+        console.log(p.propertyIsEnumerable('name')); // true
+        console.log(p.propertyIsEnumerable('age')); // true
+        console.log(p.propertyIsEnumerable('gender')); // false // 只能判断实例上的属性, 不能判断原型上的属性;
+        console.log(p.hasOwnProperty('name')); // true
+        console.log(p.hasOwnProperty('gender')); // false // 只能判断对象上的属性, 也是不能判断原型对象上的属性;
+        for(var key in p) {
+            console.log(key); // name age gender;
+            console.log(p[key]); // 张荣杰 18 男;
+        }
+
+        /*-------------------------------------------------华丽分割线-------------------------------------------------*/
+
+        // 定义一个可枚举属性和定义一个不可枚举属性;
+
+        function People() {
+            this.name = '张荣杰'; // 定义属性的第一种方式;
+        }
+        People.prototype.age = 18; // 原型上定义属性;
+        // 在原型对象上定义可枚举属性可不可枚举属性;
+        Object.defineProperty(People.prototype, 'black', {
+            value: '非洲',
+            enumerable: true
+        });
+        Object.defineProperty(People.prototype, 'white', {
+            value: '北美',
+            enumerable: false
+        })
+
+        var pe = new People();
+        console.log(pe);
+        // 在实例上定义可枚举属性和不可枚举属性;
+        Object.defineProperty(pe, "gender", {
+            value: '女',
+            enumerable: false // 定义一个不可枚举属性;
+        });
+        Object.defineProperty(pe, "nation", {
+            value: '中国',
+            enumerable: true // 定义一个可枚举属性;
+        });
+        console.log(pe);
+        for(var key in pe) {
+            console.log(key);
+            console.log(pe[key]);
+        }
+        console.log(Object.keys(pe)); // name nation // 只会取到可枚举属性,和实例上的属性[原型上属性取不到];
+        
+
+
+
+
+    </script>
+
+</body>
+</html>

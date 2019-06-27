@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归</title>
+</head>
+
+<body>
+
+    <div id="box">
+
+    </div>
+
+    <script>
+
+        var arr = [
+            {
+                title: '首页',
+                key: '/admin/home'
+            },
+            {
+                title: 'UI',
+                key: '/ui',
+                children: [
+                    {
+                        title: '按钮',
+                        key: '/ui/buttons'
+                    },
+                    {
+                        title: '弹框',
+                        key: '/ui/modals'
+                    },
+                    {
+                        title: 'Loading',
+                        key: '/ui/loadings'
+                    },
+                    {
+                        title: '通知提醒',
+                        key: 'ui/notification'
+                    },
+                    {
+                        title: '全局Message',
+                        key: '/ui/message'
+                    },
+                    {
+                        title: 'Tab页签',
+                        key: '/ui/tabs'
+                    },
+                    {
+                        title: '图片画廊',
+                        key: '/ui/gallery'
+                    },
+                    {
+                        title: '轮播图',
+                        key: '/ui/carousel'
+                    }
+                ]
+            },
+            {
+                title: '表单',
+                key: '/form',
+                children: [
+                    {
+                        title: '登陆',
+                        key: '/form/login'
+                    },
+                    {
+                        title: '注册',
+                        key: '/form/reg'
+                    }
+                ]
+            },
+            {
+                title: '表格',
+                key: '/table',
+                children: [
+                    {
+                        title: '基础表格',
+                        key: '/table/basic'
+                    },
+                    {
+                        title: '高级表格',
+                        key: '/table/high'
+                    }
+                ]
+            },
+            {
+                title: '富文本',
+                key: '/rich'
+            },
+            {
+                title: '城市管理',
+                key: '/city'
+            },
+            {
+                title: '订单管理',
+                key: '/order',
+                btnList: [
+                    {
+                        title: '订单详情',
+                        key: 'detail'
+                    },
+                    {
+                        title: '结束订单',
+                        key: 'finish'
+                    }
+                ]
+            },
+            {
+                title: '员工管理',
+                key: '/user'
+            },
+            {
+                title: '车辆地图',
+                key: '/bikeMap'
+            },
+            {
+                title: '图标',
+                key: '/charts',
+                children: [
+                    {
+                        title: '柱形图',
+                        key: '/charts/bar'
+                    },
+                    {
+                        title: '饼图',
+                        key: '/charts/pie'
+                    },
+                    {
+                        title: '折线图',
+                        key: 'charts/line'
+                    }
+                ]
+            },
+            {
+                title: '权限设置',
+                key: '/permission'
+            }
+
+        ];
+
+        function foo(arr,el) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].children) {
+                    var ul = document.createElement('ul');
+                    ul.innerHTML = arr[i].title;
+                    el.appendChild(ul);
+                    foo(arr[i].children,ul);
+                } else {
+                    var li = document.createElement('li');
+                    li.innerHTML = arr[i].title;
+                    el.appendChild(li);
+                }
+
+            }
+        }
+        foo(arr,document.querySelector('#box'));
+
+        // 1. 首先执行最外边一层的东西.
+        // 2. 第一次判断children // false
+        // 3. 第二次判断有children // true // str = <h1>首页</h1><h1>UI</h1>
+        // 4. 重新执行foo方法, arr = UI.children // str = '';
+        // 5. //str = "<h1>按钮</h1><h1>弹框</h1><h1>Loading</h1><h1>通知提醒</h1><h1>全局Message</h1><h1>Tab页签</h1><h1>图片画廊</h1><h1>轮播图
+        // 6. 将 5 的内容渲染上去了.
+        // 7. 继续执行一开始传入的数组.
+
+        // 注: you ka da;
+
+
+    </script>
+
+
+
+</body>
+
+</html>

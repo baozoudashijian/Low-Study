@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        /// 封装一个ajax;
+
+        // 为什么使用ajax技术? 因为可以通过ajax实现页面的无刷新请求;
+        let xhr = new XMLHttpRequest();
+        console.log(xhr);
+
+        // 相当于初始化,不会真正的发送请求;
+        xhr.open('get',"http://localhost:8080/");
+        
+        // send真正的发送请求
+        // 当为get请求时,send(null)，当为post请求是,send(data)
+        xhr.send(null);
+
+        // readyState属性值的变化会触发onreadystatechange方法;
+        xhr.onreadystatechange = function() {
+            console.log(xhr.readyState); // 2 //3 // 4;
+            // readyStatus值的含义;
+            
+            // xhr.readyState === 0 尚未调用open方法; /// 这一步不会触发onreadystatechange事件;
+            // xhr.readState === 1 已调用open方法; /// 这一步不会触发onreadystatechange事件;
+            // xhr.readState === 2 已发送请求
+            // xhr.readState === 3 已接收到请求返回的数据;
+            // xhr.raedyState === 4 请求完成
+
+            if(xhr.readyState === 4) {
+                if(xhr.status === 200) {
+                    console.log(xhr.responseText,'请求成功'); // hello world;
+                }
+            }
+        }
+        // 当网络不好的情况的时候,设置一个网络超时;
+        xhr.timeout = 1000;
+        xhr.ontimeout = function() {
+            console.log('网络请求超时;')
+        }
+
+        // 封装ajax
+        function ajax(options) {
+            let url = options.url; // 获取请求地址;
+            let method = options.method.toLowerCase() || 'get'; // 不填就是get
+            let data = options.data;
+            let xhr = new XMLHttpRequest();
+
+            if(options.timeout && options.timeout > 0) {
+                xhr.timeout = options.timeout; // 设置网络请求超时
+            }
+
+            return new Promise((reslove,reject) => {
+                let params = [];
+                let encodeData;
+
+                // 数据为get || post 不同的处理方式.
+                if(data instanceof Object) { // 这里不太严谨,数组方法都是Object；
+                    for(let key in data) {
+                        params.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+                    }
+                    encodeData = params.join('&');
+                }
+
+                if(method === 'get') {
+                    let index = url.indexOf('?');
+                    if(index === -1) url += '?';
+                    url += encodeData;
+                }
+
+                xhr.open(method,url);
+                if(method === 'get') xhr.send(null);
+                else {
+                    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=UTF-8');//post 提交的一种格式
+                    xhr.send(encodeData);
+                }
+
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState === 4)  {
+                        if(xhr.status === 200) {
+                            reslove && reslove(xhr.responseText);
+                        } else {
+                            reject && reject();
+                        }
+                    }
+                }
+
+                xhr.onerror = function(err) {
+                    reject && reject(err);
+                }
+
+            })
+
+
+        }
+        ajax({
+            url: 'http://localhost:8080/',
+            method: 'get',
+            timeout: 1000,
+            data: {
+                a: 1,
+                b: 2
+            }
+        }).then(
+            res => console.log('请求成功' + res),
+            err => console.log('请求失败' + err)
+        )
+
+    </script>
+
+</body>
+</html>

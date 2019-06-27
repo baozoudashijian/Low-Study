@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Math对象常用方法合集</title>
+</head>
+<body>
+    
+    <script>
+        
+        ///  Math 对象方法常用合集;
+        
+        // Math.round() 四舍五入
+        console.log(Math.round(5.4)); //5
+        console.log(Math.round(5.6)); //6
+        console.log(Math.round(-1.4)); // -1 // 关于负数比较值,去最中间, 坐标轴偏向那边就取哪边的值;
+        console.log(Math.round(-1.6)) // -2  // 关于负数比较值,去最中间, 坐标抽偏向那边就取哪边的值;
+
+        // Math.ceil() 向上取整
+        console.log(Math.ceil(1.2)); // 2
+        console.log(Math.ceil(1.8)); // 2
+        console.log(Math.ceil(-1.2)); // -1 // 往大的值去取;
+        console.log(Math.ceil(-1.8)); // -1 // 往大的值去取;
+        
+        // Math.floor() 向下取整
+        console.log(Math.floor(1.2)); // 1
+        console.log(Math.floor(1.8)); // 1
+        console.log(Math.floor(-1.2)); // -2
+        console.log(Math.floor(-1.8)); // -2
+
+        // Math.abs() 取绝对值
+        console.log(Math.abs(1.2)); // 1.2
+        console.log(Math.abs(1.8)); // 1.8
+        console.log(Math.abs(-1.2)); // 1.2
+        console.log(Math.abs(-1.8)); // 1.8
+
+        // Math.max() 取最大值
+        console.log(Math.max(5,44,34,64,64)); // 64
+        console.log(Math.max(-323,42,34,23,-42,3)); // 42
+
+        // Math.min() 取最小值
+        console.log(Math.min(340,29,830,92)); // 29
+        console.log(Math.min(-74,29,37,49,-39,24)); // -74
+
+        // Math.random() 取随机数
+        console.log(Math.floor(Math.random() * 11));
+ 
+        // Math.pow() 取次方数
+        console.log(Math.pow(2,9)); // 2 的 9 次方
+        console.log(Math.pow(521,0)); // 1
+        console.log(Math.pow(-2,2)); // 
+
+        // 数组数据类型取最大值;
+        console.log(Math.max.apply(null, [57,637,37,6])); // 637
+
+
+    </script>
+
+</body>
+</html>

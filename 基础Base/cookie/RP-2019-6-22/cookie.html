@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cookie</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // cookie
+        // 1. 为什么会出现cookie? 
+        // 答: 网络最大的问题之一就是如何管理状态,简而言之,服务器无法知道两个请求是否来自同一个浏览器;
+
+        // 2. cookie响应原理
+        // 由于http是无状态协议,一旦客户端与服务端交换完毕,就会断开链接,再次请求,会重新连接,这就
+        // 说明服务器单从网络连接上是没有办法知道用户身份的,怎么办呢? 那就每次给新的用户请求是,给他颁发一个身份证
+        // 下次访问是,必须带上身份证,这样服务器就知道是谁来访问了,针对不同的用户做出不同的响应,这就是cookie的原理
+        // 两个步骤: 第一次请求: 颁发身份证 之后的请求 要求带上cookie;
+
+        // 3.cookie是纯文本
+        // cookie就是存储一些服务器需要的信息,每次请求站点,会发送响应的cookie,这些cookie用来辨别用户身份信息等作用
+
+        // 4. cookie的执行流程
+        // 用户第一次请求时给你一个id, 然后之后的请求你都需要带上这个id去请求.
+
+        // 5. cookie 可以设置过期时间
+        // cookie按照过期时间可以分为两类,会话cookie和持久化cookie,会话cookie是一种临时的cookie,用户退出浏览器
+        // 会话cookie就被删除了,持久化cookie则会存储在硬盘里,保留时间更长,关闭浏览器,重启电脑依旧存在,通常持久化
+        // cookie会维护某一个用户周期性访问服务器的配置文件或登陆信息
+        // 持久化cookie: 设置一个特定的时间过期(Expires) 或者有效期(Max-Age);
+
+        // 6. cookie属性
+        // cookie的域: 根据不同的域(domain)发送不同的cookie;
+        // path: path可以为服务器特定文档指定cookie,这个属性设置的url且带有这个前缀的url路径都是有效的.
+        // secure: 设置secure属性, cookie只有在https协议加密情况下才会发送黑服务端.
+
+        // 7. 操作cookie
+        // 没有直接操作cookie的方法,需要自己去封装;
+
+        // 设置cookie
+        function setCookie(key, value, time) {
+            var uselessTime = new Date();
+            
+            uselessTime.setDate(uselessTime.getDate() + time); // 这里是设置uselessTime,如果这里错误,下面全部错误;
+            console.log(uselessTime);
+            console.log(uselessTime.getDate()); // 返回 22 当前月份22号;
+            console.log(uselessTime.setDate(uselessTime.getDate())); // time 是几返回当前天数的后几天;
+
+            document.cookie = key + '=' + value + ';expires=' + uselessTime.toGMTString(); // 过期时间的设置;
+            
+        }
+        setCookie('zrj','男',9);
+        setCookie('zq','女',7);
+         
+        function getCookie(key) {
+            var arr = document.cookie.split(';');
+            console.log(arr);
+            for(var i=0; i<arr.length; i++) {
+                var tempArr = arr[i].split('=');
+                console.log(tempArr);
+                if(tempArr[0].trim() == key) { // key 会出现空格不知道什么原因;
+                    console.log(tempArr[1]);
+                    return decodeURI(tempArr[1]); 
+                    // encodeURIComponent // 编码;  
+                    // decodeURI // 解码;
+                }
+            }
+        }
+        console.log(getCookie('zrj'));
+        console.log(getCookie('zq'))
+ 
+
+        /// 注: 设置cookie需要在服务器在服务器的环境下; file协议下不能设置cookie;
+        // cookies保存位置: C:\Users\zhangrongjie\Cookies;
+        // 用户在浏览器输入url, 发送请求, 服务器接受请求
+
+        // 服务器在响应报文中生成一个Set - Cookie报头, 发给客户端
+
+        // 浏览器取出响应中Set - Cookie中内容, 以cookie.txt形式保存在客户端
+
+        // 如果浏览器继续发送请求, 浏览器会在硬盘中找到cookie文件, 产生Cookie报头, 与HTTP请求一起发送.
+
+        //     服务器接受含Cookie报头的请求, 处理其中的cookie信息, 找到对应资源给客户端.
+
+        //         浏览器每一次请求都会包含已有的cookie.
+    </script>
+</body>
+</html>

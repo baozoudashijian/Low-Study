@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>valueof和toString的区别</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // valueof和toString的区别;
+
+        let test = {
+            sex: 21,
+            age: 20,
+            toString: function() { // 等于重写Object.prototype.toString;
+                console.log('调用了 toString方法');
+                return this.age - 10;
+            }, 
+            valueOf: function()  {  // 等于重写Object.prototype.valueof;
+                 console.log('调用了 valueof方法');
+                return this.age + 40; // 方法中返回什么属性,比较的就是什么属性;
+            }
+        }
+        // console.log(test > 20); // false // valueof写错的时候自动调用了toString方法;
+        console.log(test > 20) // true // 调用了valueof方法.
+        console.log(+test); // 60, 进行运算调用的是valueof方法;
+        console.log(test); // {sex: 21, age: 20, toString: ƒ, valueOf: ƒ} 控制台输出是test对象;
+        // alert(test); // 10 // alert输出的是10; 调用的是toString方法;
+        console.log('' + test); // 60 //调用了valueof
+        console.log(String(test)); // 10 // toString
+        console.log(Number(test)); // 60 // valueOf
+
+
+
+
+        // 注: 得出结论
+        //          1. 对象进行运算 > + 会自动调用valueof || toString 方法;
+        //          2. 在进行运算的时候优先调用valueOf,转成字符串优先调用toString();
+
+    </script>
+
+</body>
+</html>

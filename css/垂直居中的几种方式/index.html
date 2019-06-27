@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实现垂直剧中的几种方式</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .box {
+        width: 200px;
+        height: 200px;
+        background: #c00;
+    }
+
+    .box1 {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .box2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box3 {
+        position: relative;
+    }
+
+    .box3 span {
+        position: absolute;
+        width: 100px; /*span元素脱离文档流可以设置高度*/
+        height: 100px; /*span元素脱离文档流可以设置高度*/
+        top: 50%;
+        left: 50%;
+        /* margin-left: -50px;
+        margin-top: -50px; */
+        /* transform: translateX(-50px) translateY(-50px); */
+        transform: translate(-50%,-50%);
+        background: green;
+    }
+    .box4 {
+        position: relative;
+    }
+    .box4 span {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        overflow: auto;
+        background: greenyellow;
+    }
+</style>
+
+<body>
+
+    <h1>display: table</h1>
+    <div class="box1 box">
+        垂直居中
+    </div>
+    <h1>display: flex</h1>
+    <div class="box2 box">
+        垂直居中
+    </div>
+    <h1>绝对定位</h1>
+    <div class="box3 box">
+        <span>绝对定位</span>
+    </div>
+    <h1>绝对定位和0</h1>
+    <div class="box4 box">
+        <span>绝对定位</span>
+    </div>
+</body>
+
+</html>

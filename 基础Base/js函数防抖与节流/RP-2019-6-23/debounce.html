@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数防抖与节流</title>
+</head>
+<body style="height: 10000px">
+
+    Debounce: <input type="text" id="input">
+
+    <script>
+        
+        /// 函数防抖.
+        
+        function debounce(func,ms) {
+            let timer = null;
+            return function() {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.call(this,arguments);
+                },ms)
+            }
+        } 
+        let debounceRun  = debounce(() => {
+            console.log('防止抖动函数');
+        },3000);
+        document.querySelector('#input').addEventListener('keyup',debounceRun);
+
+
+        /// 函数节流.
+
+        // 本人写的塑料方法;
+
+        function throttle2(m) {
+            var prevDate = new Date().getTime();
+            return function(callback) {
+                if(new Date().getTime() - prevDate > m*1000) {
+                    callback();
+                    prevDate = new Date();
+                }
+            }
+        }
+        let func = throttle2(3);
+        // window.onscroll = function() {
+        //     func(() => {console.log('你滚动了滚动条')})
+        // }
+
+        // 大神写法
+        
+        function throttle(func, wait) {
+            let previous = 0;
+            return function () {
+                let now = Date.now();
+                // console.log(now); // 1561273381718 // 获取的是当前时间的时间戳;
+                let context = this;
+                // console.log(this); // window // 此时的this指向window;
+                let args = arguments; 
+                // console.log(args); // Argunmens对象; 此时的arguments对象中有事件对象;
+                if(now - previous > wait) { // 这样判断解决了第一次的问题,第一次if返回的肯定是true;
+                    func.apply(context,args);
+                    previous = now; // 将现在的事件作为之前的时间.
+                }
+            }
+        }
+        let throttleRun = throttle(() => {
+            console.log("you scroll the bar");
+        },4000);
+        window.addEventListener('scroll',throttleRun);
+
+
+    </script>
+    
+</body>
+</html>

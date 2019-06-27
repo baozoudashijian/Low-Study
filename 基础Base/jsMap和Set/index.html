@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6中Map和Set</title>
+</head>
+<body>
+
+
+
+    <script>
+        
+        // Map
+        let m = new Map();
+        
+        // Map.set() 方法
+        m.set('name','张荣杰');
+        m.set('age','18');
+        m.set('nation','汉族');
+        console.log(m);
+        console.log(typeof m); // object
+        console.log(Object.prototype.toString.call(m)); // [Object Map]; // map是一个新的数据类型;
+
+        // Map.get() 方法.
+        console.log(m.get('name')); // 张荣杰
+        console.log(m.get('age')); // 18 
+        console.log(m.get('nation')); // 汉
+
+        // Map.size 属性
+        console.log(m.size); // 3
+
+        // Map.foreach()
+        m.forEach(function(item, index) {
+            console.log(item, 'supereme');
+            console.log(index, 'champion');
+        });
+
+        // for...of 去遍历;
+        for(let key of m) {
+            console.log(key,'for of'); // ["name","张荣杰"] ["age","18"] ["nation","汉族"]
+            console.log(key[0],key[1]);// name,张荣杰 age,18 nation,汉族 
+            console.log(m,'for of'); // 整体感觉 有点类似二维数组;
+        }
+
+        var mm = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
+        
+        for(let k of mm) {
+            console.log(k);
+            console.log(k[0],k[1]);
+            console.log(mm);
+        }
+        console.log(mm); // 直接定义要这样写.
+
+        // Map.has() 
+        console.log(m.has('name')); // true
+        console.log(m.has('age')); // true
+        console.log(m.has('nation')); // true
+        console.log(m.has('gender')); // false
+
+        // Map.keys() // Map.keys 和 Map.values 是一对;
+        console.log(m.keys()); // MapIterator {"name", "age", "nation"} // 不知道怎么搞;
+        console.log(Object.prototype.toString.call(m.keys()));//[object Map Iterator]
+
+        // Map.values() // Map.keys 和 Map.values 是一对;
+        console.log(m.values());
+
+        // Map.delete();
+        m.delete('name');
+        console.log(m); // 此时删除了name属性;
+
+        // Map.clear();
+        m.clear(); // 清楚所有的属性.
+        console.log(m);
+
+
+        // Set
+        var s = new Set();
+        
+        s.add(1);
+        s.add(2);
+        s.add(2);
+        s.add(3);
+        s.add('str');
+        s.add(false);
+        console.log(s);
+
+        // Array 
+
+    let arr = [1,2,3,4,5];
+    arr.name = 6;
+    for(let kk in arr) {
+        console.log(kk); // 0 1 2 3 4 name
+        console.log(arr[kk]);
+        console.log(arr.length); // 5
+        // 数组的索引作为key,也可以遍历出name属性,但是arr.length却不包括length;
+    }
+
+    for(let s of arr) {
+        console.log(s); // 1 2 3 4 5;
+        console.log(arr);
+        // 只循环集合本身的元素; name 属性不会循环出来;
+    }
+
+        
+    </script>
+    
+</body>
+</html>

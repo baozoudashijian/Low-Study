@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperty</title>
+</head>
+<body>
+    
+
+
+    <script>
+        
+        // Object.defineProperty
+
+        // let obj = {
+        //     name: '张荣杰',
+        //     age: 18
+        // }
+        // Object.defineProperty(obj,'age',{
+        //     get: function() {
+        //         // console.log('证明调用了get方法');
+        //         return this.age;
+        //     },
+        //     set: function(newAge) {
+        //         console.log('证明调用了set方法');
+        //         this.age = newAge;
+        //         console.log(this.name + '现在' + newAge + '岁');
+        //     }
+        // });
+        // console.log(obj.age); // 取值的话 会调用get方法
+        // // obj.age = 20; // 复制的话 会调用set方法;
+        // // console.log(obj);
+        
+
+        let obj = {
+            name: '张荣杰',
+            _age: 18
+        }
+        Object.defineProperty(obj,'age',{
+            get: function() {
+                // console.log('证明调用了get方法');
+                return this._age;
+            },
+            set: function(newAge) {
+                console.log('证明调用了set方法');
+                this._age = newAge;
+                console.log(this.name + '现在' + newAge + '岁');
+            }
+        });
+        console.log(obj._age); // 取值的话 会调用get方法
+        // obj.age = 20; // 复制的话 会调用set方法;
+        // console.log(obj);
+
+
+
+        // 注: age 不改成_age会报错,不知道是什么原因.【调用对象内部属性_age是约定的属性】
+        
+
+    
+    </script>
+
+
+</body>
+</html>

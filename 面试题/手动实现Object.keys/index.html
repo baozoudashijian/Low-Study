@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.keys</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // Object.keys
+
+        let obj = {name: '张荣杰',age: 17,nation: '汉'};
+
+        // Object.defineProperty(obj,'gender',{value: '男',writable: true}); // 使用defineProperty enuemerable默认是false;
+        Object.defineProperty(obj,'gender',{value: '男',writable: true,enumerable: true});
+        Object.defineProperty(obj,'birthday',{value: '2019-06-26',writable: true, enumerable: false});
+        console.log(obj); // {name: "张荣杰", age: 17, nation: "汉", gender: "男", birthday: "2019-06-26"}
+        console.log(Object.keys(obj)); // ["name", "age", "nation", "gender"] // 将对象所有的key值,装进一个新数组,并返回,只会操作和美剧属性;
+
+        //
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+            this.add = function() {
+
+            }
+        }
+        Person.prototype.gender = '男';
+
+        let p = new Person('jj','28');
+        console.log(Object.keys(p),'person'); // 证明: 只会遍历构造函数上的属性,不会遍历原型对象上的属性;
+
+        // 手动实现Object.keys
+        Object.keys = null;
+        if(typeof Object.keys != 'function') {
+            (function() {
+                Object.keys = function(obj) {
+                    if(Object.prototype.toString.call(obj) !== '[object Object]') {
+                        throw new TypeError("the params1 must be a object");
+                    }
+                    let arr = [];
+                    console.log(obj);
+                    for(let key in obj) {
+                        if(obj.hasOwnProperty(key)){ // 只要构造函数中的属性;
+                            arr.push(key);
+                        }
+                    }
+                    return arr;
+                }
+            }) ()
+        }
+        let o = {name: 'jay', age: 24}
+        Object.defineProperty(o,'gender',{value: '男'});
+        console.log(o);
+        console.log(Object.keys(o));
+        console.log(Object.keys(p));
+
+        // 注: for...in
+                        // 只能遍历可枚举属性,不能遍历不可枚举属性;
+                        // 可以遍历构造函数属性,也可以遍历原型对象上的属性;
+        
+    </script>
+
+</body>
+</html>

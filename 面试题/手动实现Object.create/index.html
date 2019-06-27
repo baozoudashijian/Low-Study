@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>手动实现Object.create</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        // 实现ES6 Object.create() 方法;
+
+        // Object.create(proto,propertiesObject)概念: 是指定原型对象,及其属性去创建一个新对象;
+        // proto是必填参数,就是新创建出来的对象原型(新对象的__proto__属性指向的对象)
+        // 当proto为null的时候创建的新对象完全是一个空对象,没有原型,也就是没有继承
+        // Object.prototype上的方法.(如 hasOwnProperty() toString());
+
+        let o = Object.create(null);
+        console.log(o); // 真正意义上的空对象;
+
+        let b = Object.create(null, {a: {value: 1,writable: true, configurable: true}});
+        let c = Object.create(Array, {b: {value: 1, writable: true, configurable: true}})
+        console.log(b);// {a: 1}
+        console.log(c); // Function {b: 1} // 打印出来的是这个;我以为数据类型是Function;
+        console.log(Object.prototype.toString.call(c)); // [object Object];
+
+        // propertiesObject是可选参数,作用就是给新对象添加属性及描述器,需要注意的是新添加
+        // 的属性是新对象自生具有的属性也就是可以通过hasOwnProperty()方法可以获取到的属性,
+        // 而不是添加在原型对象里.
+
+        // 实现Object.create()的三个步骤
+        Object.myCreate = function(obj, properties) {
+            var F = function() {};
+            F.prototype = obj;
+            if(properties) {
+                var objF = new F(); // 简直是个天才;
+                Object.defineProperties(objF,properties);
+                console.log(F);
+            }
+            return objF;
+        }
+        let d = Object.myCreate({},{a: {value:1, writable: true, configurable: true}});
+        console.log(d);
+        
+    </script>
+
+</body>
+</html>

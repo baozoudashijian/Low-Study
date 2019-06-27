@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>cookie</title>
 </head>
+
 <body>
-    
+
 
 
     <script>
-        
+
         // 一、cookie
         // 1.为什么会出现cookie?
         // 答: 网络最大的问题之一是如何管理状态.简而言之,服务器无法知道两个请求是否来自同一个浏览器.
@@ -38,30 +40,42 @@
 
         // 6.cookie的属性
         // a.cookie的域: 根据不同的域(domain)发送不同的cookie
-        // b.path: path可以为服务器特定文档指定cookie,这个属性设置的url且带有这个前缀的url路径都是有效的.
+        // b.path: path可以为服务器特定文档指定cookie,这个属性设置的url且带有这个前缀的url路径都是有效的. 比如 path="/" /a /b /c都能访问这个cookie;
         // d.secure: 设置了secure属性,cookie只有在https协议加密情况下才会发送给服务端.
 
         // 7.操作cookie
         // 没有直接操作cookie的方法,需要自己去封装
         function getCookie(key) {
             var arr1 = document.cookie.split(';');//'name=张荣杰;sex=男;age=18' ----> ["name=张荣杰","sex=女","age=18"];
-            for(var i=0,len = arr1.length; i<len; i++) { //循环上面的数组,然后在循环中分别取分割.
+            for (var i = 0, len = arr1.length; i < len; i++) { //循环上面的数组,然后在循环中分别取分割.
                 var arr2 = arr1[i].split('=');
-                if(arr2[0] == key) {
+                if (arr2[0] == key) {
                     return decodeURI(arr2[1]);
                 }
             }
         }
 
-        function setCookie(key,value,time) {
+        function setCookie(key, value, time) {
             var oDate = new Date();
             oDate.setDate(oDate.getDate() + time);
-            document.cookie = key+'='+value+';expires='+oDate.toGMTString();
+            document.cookie = key + '=' + value + ';expires=' + oDate.toGMTString();
         }
-        setCookie('sex','女',10);
+        setCookie('sex', '女', 10);
         console.log(getCookie('sex'));
 
+        // cookies保存位置: C:\Users\zhangrongjie\Cookies;
+        // 用户在浏览器输入url, 发送请求, 服务器接受请求
 
+        // 服务器在响应报文中生成一个Set - Cookie报头, 发给客户端
+
+        // 浏览器取出响应中Set - Cookie中内容, 以cookie.txt形式保存在客户端
+
+        // 如果浏览器继续发送请求, 浏览器会在硬盘中找到cookie文件, 产生Cookie报头, 与HTTP请求一起发送.
+
+        //     服务器接受含Cookie报头的请求, 处理其中的cookie信息, 找到对应资源给客户端.
+
+        //         浏览器每一次请求都会包含已有的cookie.
     </script>
 </body>
+
 </html>
