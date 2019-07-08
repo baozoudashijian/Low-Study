@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>移动端适配</title>
+</head>
+<body>
+    
+    <!-- 移动端适配 -->
+
+    <!-- 为什么会出现移动端适配: 因为iphone6,导致移动端的屏幕种类更加混乱,以前都是iphone5/iphone5s, 屏幕宽度大小一般为320; -->
+
+    <!-- 第一种解决方案 -->
+    <!-- 流式布局:
+                百分比定义宽度
+                PX定义高度
+                优点: 能适配所有的屏幕;
+                缺点: 大屏设备下图片会被拉伸[640和320的屏幕 高度都是100, 640的图片肯定会被拉伸]
+    -->
+    <!-- 固定宽度:
+                把页面设置成320宽度,超出部分留白.
+    -->
+    <!-- 响应式做法: 
+                不用为自己的app专门做一个web app版本
+     -->
+     <!-- 设置viewPort进行缩放:
+                            <meta name="viewport" content="width=320,maximum-scale=1.3,user-scalable=no">
+                            设置320宽度为基准,进行缩放。
+    -->
+    <!-- rem适配:
+                js：设置根节点的字体大小;
+                Media Query: 设置根节点的字体大小;
+    -->
+
+</body>
+</html>

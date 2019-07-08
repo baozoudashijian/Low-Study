@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断两个对象的值是否相等</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        function isObjectValueEqual(a, b) {
+            var aProps = Object.getOwnPropertyNames(a); // 获得对象的私有属性返回一个数组;
+            var bProps = Object.getOwnPropertyNames(b); // 获得对象的私有属性返回一个数组;
+            
+            console.log(aProps);
+            console.log(bProps);
+
+            // 如果属性的长度不一致,返回false;
+            if(aProps.length !== bProps.length) {
+                return false
+            }
+            // 如果属性的内容不一致,返回false
+            for(var i=0; i<aProps.length; i++) {
+                var propName = aProps[i];
+                if(a[propName] !== b[propName]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        var obj = { a: 1, b: 2 }
+        var obj2 = { a: 1, b: 2 }
+        console.log(isObjectValueEqual(obj, obj2));
+
+        // 弄着玩 
+        Object.prototype.getOwnPropertyNamesSelf = function() {
+            var arr = [];
+            // console.log(this);
+            for(var key in this) {
+                // console.log(this,"this");
+                if(this.hasOwnProperty(key)) {
+                    arr.push(key);
+                }
+            }
+            return arr;
+        }
+        var aa = {a:1,b:2,c:3};
+        console.log(aa.getOwnPropertyNamesSelf());
+
+
+    </script>
+
+
+
+</body>
+
+</html>

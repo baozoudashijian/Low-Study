@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>inline-block产生间隙问题</title>
+</head>
+<style>
+    *{margin: 0; padding: 0;}
+    /* #box {
+        font-size: 0;    
+    } */
+    #box span {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        /* margin-right: -5px; */
+        text-align: center;
+        line-height: 100px;
+        font-size: 12px;
+        background: chartreuse;
+    }
+</style>
+<body>
+    
+    <div id="box">
+            <!-- <span>1</span><span>2</span><span>3</span> -->
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+
+    <!-- inline-block 默认会产生间距问题: 因为换行也是也是一个节点【我们代码不换行的方法也可以解决这个问题】; -->
+    <!-- 解决方法
+        1. font-size: 0;
+        2. 代码不换行
+        3. 设置margin负值.
+    -->
+
+</body>
+</html>
