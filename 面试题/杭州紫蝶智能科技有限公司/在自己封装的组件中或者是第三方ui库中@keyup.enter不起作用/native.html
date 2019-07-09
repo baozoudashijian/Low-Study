@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@keyup.enter 不起作用</title>
+</head>
+
+<body>
+
+    <script>
+
+        /**
+         * 下面这样写是监控回车键然后执行事件操作的,但是完全一点反应都没有,然后你会发现你自己写了一个input原样复制进去是没问题
+
+            <el-input  v-model="SearchData" class="input-with-select" @keyup.enter="SearchKeyDown">
+            现在我这样写了可以运行事件了,问题得到了解决,你会发现有点不同了后面多了.native
+
+            后面查了下度娘才知道,上面那种写法只适合原生,像组件是不适合用的, 加.native的原因就是为了转成原生
+
+            <el-input v-model="SearchData" class="input-with-select" @keyup.enter.native="SearchKeyDown">
+            ---------------------
+            作者：系咩
+            来源：CSDN
+            原文：https://blog.csdn.net/qq_39650528/article/details/81085669
+            版权声明：本文为博主原创文章，转载请附上博文链接！
+         *
+         * /
+
+
+
+    </script>
+</body>
+
+</html>

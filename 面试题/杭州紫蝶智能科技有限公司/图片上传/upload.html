@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片上传功能</title>
+</head>
+<style>
+    #box {
+        width: 100px;
+        height: 100px;
+        background: #fafafa;
+        border: 1px dashed #d9d9d9;
+        position: relative;
+    }
+    #pic {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+    .up {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -38px;
+        margin-left: -25px;
+        font-size: 50px;
+    }
+    #container {
+        width: 1200px;
+        height: 400px;
+    }
+    #container > div {
+        width: 200px;
+        position: relative;
+    }
+    #container img {
+        width: 200px;
+        height: 200px;
+    }
+    #container span {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 0;
+        text-align: center;
+        line-height: 20px;
+        background: black;
+        color: white;
+        border-radius: 50%;
+        z-index: 999;
+    }
+</style>
+<body>
+    <div id="box">
+        <!-- <input type="file" accept="image/png" name="" id="pic"> -->
+        <input type="file" accept="image/jpg" name="" id="pic" capture="user" multiple>
+        <!-- 
+            accept: 设定上传文件的类型; accept="image/png" 说明只能上传png后缀名格式的图片.
+            capture: 'user' 调用前置摄像头 'environment' 调用后置摄像头;
+            files 返回一个FileList,列出所选文件对象,除非multiple指定了属性否则此列表只有一个成员,主要用于JS的操作;
+         -->
+        <span class="up">+</span>
+    </div>
+    <div id="container"></div>
+    
+    <script>
+        var div = document.getElementById('box');
+        var con = document.getElementById('container');
+        var arr = {};
+        var count = 0;
+        
+        div.onchange = function(e) { // 不是使用onclick事件,是使用onchange事件.
+            
+            if(e.target.nodeName.toLowerCase() == 'input') {
+                var files = e.target.files;
+                console.log(files);
+                
+                for(var i=0; i<files.length; i++) {
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(files[i]);
+                    fileReader.addEventListener('load',function() {
+                        let res = fileReader.result;
+                        count++;
+                        console.log(res);
+                        arr[count] = res;
+                        var div2 = document.createElement('div');
+                        var span = document.createElement('span');
+                        var img = document.createElement('img');
+                        span.innerHTML="x";
+                        div2.appendChild(span);
+                        div2.appendChild(img);
+                        img.dataset.count = count;
+                        img["src"] = res;
+                        con.appendChild(div2);
+                        console.log(arr);
+                        span.addEventListener('click',function() {
+                            var count = this.nextElementSibling.dataset.count;
+                            console.log(this.nextElementSibling.dataset.count);
+                            delete arr[count];
+                            this.parentNode.parentNode.removeChild(this.parentNode);
+                        })
+                    });
+                }
+            }
+        }
+
+        // 注: 实现 增加 删除 添加元素 节点的 操作.
+     
+    </script>
+
+</body>
+</html>

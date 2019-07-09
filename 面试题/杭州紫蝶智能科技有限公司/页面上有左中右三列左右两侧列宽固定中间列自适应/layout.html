@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>左右两侧固定宽度,中间自适应</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .float {
+        overflow: hidden;
+    }
+    .float .left,.float .right {
+        width: 20%;
+        height: 200px;
+        background: #c00;
+    }
+    .float .left {
+        float: left;
+    }
+    .float .right {
+        float: right;
+    }
+    .float .center {
+        background: seagreen;
+    }
+
+    .absolute {
+        height: 200px;
+        margin-top: 20px;
+    }
+    .absolute>div {
+        position: absolute;
+        height: 100px;
+    }
+    .absolute .left {
+        width: 300px;
+        left: 0;
+        background: #c00;
+    }
+    .absolute .right {
+        width: 300px;
+        right: 0;
+        background: blue;
+    }
+    .absolute .center {
+        left: 300px;
+        right: 300px;
+        background: yellow;
+    }
+
+    .flex {
+        display: flex;
+    }
+    .flex>div {
+        height: 100px;
+    }
+    .flex .left {
+        width: 200px;
+        background: salmon;
+    }
+    .flex .right {
+        width: 200px;
+        background: gold;
+    }
+    .flex .center {
+        flex: 1;
+        background: aqua;
+    }
+
+</style>
+<body>
+    
+    <!-- 浮动 -->
+    <section class="float">
+        <div class="left">左侧</div>
+        <div class="right">右侧</div>
+        <div class="center">中间</div>
+        <!-- 将中间部分放到最后面 -->
+    </section>
+
+    <!-- 绝对定位解决方案 -->
+    <section class="absolute">
+        <div class="left">左侧</div>
+        <div class="center">中间</div>
+        <div class="right">右侧</div>
+    </section>
+
+    <!-- 弹性布局解决方案 -->
+    <section class="flex">
+        <div class="left">左边</div>
+        <div class="center">中间</div>
+        <div class="right">右边</div>
+    </section>
+
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>统计字符串出现的个数</title>
+</head>
+<body>
+    
+    <script>
+        var str = 'jdbajdaubdkjahwduigawiydgajgduywauydiawd';
+        var json = {};
+        var max = 0;
+        var value;
+
+        for(var i=0; i<str.length; i++) {
+            if(!json[str.charAt(i)]) {
+                json[str.charAt(i)] = 1;
+            }else{
+                json[str.charAt(i)]++;
+            }
+        }
+        console.log(json);
+        for(var key in json) {
+            if(json[key] > max) {
+                max = json[key];
+                value = key;
+            }
+        }
+        console.log(max);
+        console.log(value);
+    
+    
+    </script>
+
+
+</body>
+</html>

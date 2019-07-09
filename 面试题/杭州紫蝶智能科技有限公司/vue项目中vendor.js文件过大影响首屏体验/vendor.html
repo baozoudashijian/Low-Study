@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vendor.js影响首屏体验</title>
+</head>
+<body>
+    
+
+    <script>
+        /*
+            在vue项目中,引入到工程的所有js,css文件编译时都会打包进vendor.js
+            浏览器在该文件加载后才能开始显示首屏,若是引入的库众多,那么vendor.js
+            文件体积将会相当大,影响首屏体验,请写出几种常用的方法?
+        */    
+        
+
+        /*
+            解决方案: CDN的方式外部引用资源.
+            Axios、Element-ui这些基本不会改变的依赖我们可以把它们影cdn导入,没有必要打包到vendor.js中.
+        */
+        
+    </script>
+
+</body>
+</html>
