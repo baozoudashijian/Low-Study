@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript FromData类</title>
+</head>
+<body>
+    
+    <form action="login.php" method="POST" id="myForm">
+        <input type="text" name="userName" value="张荣杰">
+        <input type="password" name="password" value="Yhldcahcy521">
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+
+        // 直接 new[实例] FormData对象
+        let formData = new FormData();
+        let obj = {
+            a: 1,
+            b: 2
+        }
+
+        console.log(formData);
+        formData.append('userName','张荣杰');
+        // formData.append('userName','刘德华');
+        formData.append('age', 18);
+        formData.append('married', false);
+        formData.append('project',obj);
+        
+        console.log(formData.get('userName'));  // 张荣杰
+        console.log(formData.getAll('userName')); // ['张荣杰','刘德华']
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('post','login.php');
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        xhr.send(formData); // 这两种方式在控制台展示有所差异
+        // xhr.send('name=张荣杰&age=18'); // 这两种方式在控制台有所差异
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+            }
+        }
+
+
+
+
+        // 使用表单的方式实例对象
+        let myForm = document.getElementById('myForm');
+        let formData2 = new FormData(myForm);
+        console.log(formData2);
+        console.log(formData2.get('userName')); // 张荣杰;
+        console.log(formData2.get('password')); // Yhldcahcy521
+
+
+        // 1.formData可以设置多个值.
+
+    </script>
+
+</body>
+</html>
